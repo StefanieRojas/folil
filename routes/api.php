@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\ColaboradorController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +17,9 @@ use App\Http\Controllers\ProveedorController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::get('/loginme', [LoginController::class, 'login']);
 Route::get('/obtenerProveedores', [ProveedorController::class, 'obtenerProveedores']);
+Route::middleware('auth:api')->post('/obtenerColaborador',[ColaboradorController::class, 'obtenerColaborador']);
