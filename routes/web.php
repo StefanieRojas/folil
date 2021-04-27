@@ -17,7 +17,7 @@ use App\Http\Controllers\LoginController;
 
   Route::get('/', function () {
       //return view('login');
-      header("location:./index.html");
+      header("location:./gestion/html/index.html");
       exit;
   });
 

@@ -18,16 +18,16 @@ class LoginController extends BaseController
     {
         $post = $request->all();
         $validator = Validator::make($post, [
-            'user' => 'required',
+            'usuario' => 'required',
             'password' => 'required',
         ],$messages = [
-            'required' => 'El :attribute es requerido.',
+            'required' => ':attribute es requerido/a.',
         ]);
 
         if ($validator->fails()) {
             return response()->json(array("respuesta"=>"error","descripcion"=>$validator->errors()),422); 
         }
-        $nombreUsuario = trim($post["user"]); //trim toma algo que le envio y le borra los espacion en blanco del principio y final.
+        $nombreUsuario = trim($post["usuario"]); //trim toma algo que le envio y le borra los espacion en blanco del principio y final.
         $pass = trim($post["password"]);
         $colaborador = Colaborador::where('nombre_colab',$nombreUsuario)->where('password_colab',md5($pass))->first();
 
