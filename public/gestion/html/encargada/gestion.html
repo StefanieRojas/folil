@@ -7,14 +7,24 @@
   
   <script type="text/javascript" src="../../vendor/jQuery.js"></script>
   <script type="text/javascript" src="../../vendor/utils.js"></script>
-  <script type="text/javascript" src="../../vendor/Popper/popper.min.js"></script>
+  <script type="text/javascript" src="../../vendor/Popper/popper.min.js"></script> 
   <script type="text/javascript" src="../../vendor/bootstrap4.6.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../../js/encargada/encargada.js"></script>
   <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="../../vendor/DataTables/"></script>
+  <script type="text/javascript" src="../../vendor/DataTables/js/dataTables.editor.min.js"></script>
+  <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="../../vendor/DataTables/js/editor.bootstrap4.min.js"></script>
+  <script type="text/javascript" src="../../vendor/DataTables/js/dataTables.editor.min.js"></script>
+  <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/dataTables.select.min.js"></script>
 
-  <link href="../../vendor/bootstrap4.6.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../vendor/DataTables/DataTables-1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="../../vendor/bootstrap4.6.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+  <link href="../../vendor/DataTables/css/editor.dataTables.min.css" rel="stylesheet">
+  <link href="../../vendor/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../vendor/DataTables/css/editor.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../vendor/DataTables/DataTables-1.10.24/css/buttons.bootstrap4.min.css" rel="stylesheet">
+  <link href="../../vendor/DataTables/DataTables-1.10.24/css/select.boostrap4.min.css" rel="stylesheet">
   
 </head>
 <body>
@@ -47,6 +57,7 @@
     </div>
   </nav>
   <div>
+    <a class="editor-create">+ Create new record</a>
     <table id="tablaColaboradores" class="display" style="width:100%">
       <thead>
           <tr>
@@ -55,6 +66,8 @@
               <th>Correo</th>
               <th>Privilegio</th>
               <th>Estado</th>
+              <th>dd</th>
+              <th>ff</th>
           </tr>
       </thead>
       <tbody>

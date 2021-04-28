@@ -25,21 +25,130 @@ $( document ).ready(function() {
       })
   }
 
+  var editor; // use a global for the submit and return data rendering in the examples
+
   function tabla(datos){
-      console.log(datos);
-    $('#tablaColaboradores').DataTable( {
+    editor = new $.fn.dataTable.Editor( {
+        "data": datos,
+        "table": "#tablaColaboradores",
+        idSrc:  'id_colaborador',
+        "fields": [ {
+                "label": "Nombre:",
+                "name": "nombre_colab"
+            }, {
+                "label": "Apellido:",
+                "name": "apellido_colab"
+            }, {
+                "label": "Correo:",
+                "name": "correo_colab"
+            }, {
+                "label": "Privilegio:",
+                "name": "id_privilegio"
+            }, {
+                "label": "Estado:",
+                "name": "id_estado"
+            }
+        ]
+    } );
+ 
+    // New record * para crear un nuevo usuario
+    $('a.editor-create').on('click', function (e) {
+        e.preventDefault();
+ 
+        editor.create( {
+            title: 'Create new record',
+            buttons: 'Add'
+        } );
+    } );
+ 
+    // Edit record * crea un botton para editar los datos de mi tabla
+    $('#tablaColaboradores').on('click', 'td.editor-edit', function (e) {
+        e.preventDefault();
+ 
+        editor.edit( $(this).closest('tr'), {
+            title: 'Edit record',
+            buttons: 'Update'
+        } );
+    } );
+ 
+    // Delete a record * crea un botton para borrar los datos de mi tabla
+    $('#tablaColaboradores').on('click', 'td.editor-delete', function (e) {
+        e.preventDefault();
+ 
+        editor.remove( $(this).closest('tr'), {
+            title: 'Delete record',
+            message: 'Are you sure you wish to remove this record?',
+            buttons: 'Delete'
+        } );
+    } );
+    
+    var table = $('#tablaColaboradores').DataTable( {
         data: datos,
         columns: [
-            { data: 'nombre_colab' },
-            { data: 'apellido_colab' },
-            { data: 'correo_colab' },
-            { data: 'id_privilegio' },
-            { data: 'id_estado'}
+            // { data: null, render: function ( data, type, row ) {
+            //     // Combine the first and last names into a single table field
+            //     return data.first_name+' '+data.last_name;
+            // } },
+            { data: "nombre_colab" },
+            { data: "apellido_colab" },
+            { data: "correo_colab" },
+            { data: "id_privilegio" },
+            { data: "id_estado"},
+            {
+                data: null,
+                className: "dt-center editor-edit",
+                defaultContent: '<i class="fa fa-pencil"/>',
+                orderable: false
+            },
+            {
+                data: null,
+                className: "dt-center editor-delete",
+                defaultContent: '<i class="fa fa-trash"/>',
+                orderable: false
+            }
         ],
+        language: idioma_espanol
+    });
+//       console.log(datos);
+//     $('#tablaColaboradores').DataTable( {
+//         data: datos,
+//         columns: [
+            
+//             { data: 'nombre_colab' },
+//             { data: 'apellido_colab' },
+//             { data: 'correo_colab' },
+//             { data: 'id_privilegio' },
+//             { data: 'id_estado'},
+//             {    
+//                 //edit button creation    
+//                 render: function (data, type, row) {    
+//                     return createButton('edit', row.id);    
+//                 }    
+//             },    
+//         ],        
+//         "searching": false,    
+//         "paging": true,    
+//         "info": true,    
+//         "language": {    
+//             "emptyTable": "No data available"    
+//         },   
+//         "fnRowCallback": function (nRow, aData, iDisplayIndex) {    
+//             $("td:first", nRow).html(iDisplayIndex + 1);    
+//             return nRow;    
+//         },    
+        
+    
+//         "language": idioma_espanol
+//     } ); 
+    
+   
+    
+// function createButton(buttonType, rowID) {    
+//     var buttonText = buttonType == "edit" ? "Edit" : "Delete";    
+//     return '<button class="' + buttonType + '" type="button">' + buttonText+'</button>';    
+// }    
 
-        "language": idioma_espanol
-    } );   
-  }
+//   }
 
   var idioma_espanol = {
         "processing": "Procesando...",
@@ -220,3 +329,4 @@ $( document ).ready(function() {
         },
         "info": "Mostrando de _START_ a _END_ de _TOTAL_ entradas"
     }
+}
