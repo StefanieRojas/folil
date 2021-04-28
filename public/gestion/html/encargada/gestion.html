@@ -1,25 +1,28 @@
 <!doctype html>
 <html>
 <head>
-  <title>Prueba de Bootstrap 4</title> 
+  <title>Vista Encargada</title> 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  
   <script type="text/javascript" src="../../vendor/jQuery.js"></script>
   <script type="text/javascript" src="../../vendor/utils.js"></script>
   <script type="text/javascript" src="../../vendor/Popper/popper.min.js"></script>
   <script type="text/javascript" src="../../vendor/bootstrap4.6.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../../js/encargada/encargada.js"></script>
+  <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="../../vendor/DataTables/"></script>
 
   <link href="../../vendor/bootstrap4.6.0/css/bootstrap.min.css" rel="stylesheet">
-
+  <link href="../../vendor/DataTables/DataTables-1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
+  
 </head>
 <body>
   <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
+      
     <!-- logo -->
     <a class="navbar-brand" href="#">
       <img src="http://www.tutorialesprogramacionya.com/imagenes/foto1.jpg" width="30" height="30" alt="">
@@ -43,5 +46,41 @@
       </ul>
     </div>
   </nav>
+  <div>
+    <table id="tablaColaboradores" class="display" style="width:100%">
+      <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Correo</th>
+              <th>Privilegio</th>
+              <th>Estado</th>
+          </tr>
+      </thead>
+      <tbody>
+         
+      </tbody>
+    </table>
+    </div>
+    <div class="contenedor-modal">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#miModal">Abrir modal</button>
+    </div>
+     <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Agregar</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            
+          </div>
+          <div class="modal-body">
+            Texto del modal
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
 </body>
 </html>
