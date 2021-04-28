@@ -67,18 +67,7 @@ body,
 		.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
 			background-color: #c0392b !important;
 		}       
-		contenedor-modal {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			text-align: center;
-		  }
-		  
-		  .contenedor-modal button {
-			position: relative;
-			top: 40%;
-		  }
-		  a.editor-create {
+		a.editor-create {
 			display: inline-block;
 			margin-bottom: 0.5em;
 		}

@@ -15,7 +15,9 @@
   <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/dataTables.buttons.min.js"></script>
   <script type="text/javascript" src="../../vendor/DataTables/js/editor.bootstrap4.min.js"></script>
   <script type="text/javascript" src="../../vendor/DataTables/js/dataTables.editor.min.js"></script>
+  <script type="text/javascript" src="../../vendor/fontawesome/js/fontawesome.min.js"></script>
   <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/dataTables.select.min.js"></script>
+  <script type="text/javascript" src="../../vendor/fontawesome/js/solid.min.js"></script>
 
   <link href="../../vendor/DataTables/DataTables-1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="../../vendor/bootstrap4.6.0/css/bootstrap.min.css" rel="stylesheet">
@@ -25,6 +27,7 @@
   <link href="../../vendor/DataTables/css/editor.bootstrap4.min.css" rel="stylesheet">
   <link href="../../vendor/DataTables/DataTables-1.10.24/css/buttons.bootstrap4.min.css" rel="stylesheet">
   <link href="../../vendor/DataTables/DataTables-1.10.24/css/select.boostrap4.min.css" rel="stylesheet">
+  <link href="../../vendor/fontawesome/css/solid.min.css" rel="stylesheet">
   
 </head>
 <body>
@@ -57,7 +60,7 @@
     </div>
   </nav>
   <div>
-    <a class="editor-create">+ Create new record</a>
+    <button type="button" class="btn btn-primary">Nuevo Colaborador</button>
     <table id="tablaColaboradores" class="display" style="width:100%">
       <thead>
           <tr>
@@ -66,8 +69,7 @@
               <th>Correo</th>
               <th>Privilegio</th>
               <th>Estado</th>
-              <th>dd</th>
-              <th>ff</th>
+              <th></th>
           </tr>
       </thead>
       <tbody>
@@ -75,22 +77,6 @@
       </tbody>
     </table>
     </div>
-    <div class="contenedor-modal">
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#miModal">Abrir modal</button>
-    </div>
-     <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Agregar</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            
-          </div>
-          <div class="modal-body">
-            Texto del modal
-          </div>
         </div>
       </div>
     </div>
