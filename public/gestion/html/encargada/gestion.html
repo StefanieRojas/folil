@@ -60,13 +60,13 @@
     </div>
   </nav>
   <div>
-    <button type="button" class="btn btn-primary">Nuevo Colaborador</button>
-    <table id="tablaColaboradores" class="display" style="width:100%">
+      <table id="tablaColaboradores" class="display" style="width:100%">
       <thead>
           <tr>
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Correo</th>
+              <th>Telefono</th>
               <th>Privilegio</th>
               <th>Estado</th>
               <th></th>
@@ -77,6 +77,63 @@
       </tbody>
     </table>
     </div>
+    <div class="contenedor-modal">
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#miModal">Abrir modal</button>
+    </div>
+     <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Editar Colaborador</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            
+          </div>
+              <div class="modal-body">
+                <label for="nombre">Nombre:</label>
+                <input type="nombre" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
+              </div>
+              
+              <div class="modal-body">
+                <label for="apellido">Apellido:</label>
+                <input type="apellido" class="form-control" id="apellido" name="apellido" placeholder="Apellido">
+              </div>
+
+              <div class="modal-body">
+                <label for="correo">Correo:</label>  
+                <input type="correo" class="form-control" id="correo" name="correo" placeholder="Correo">
+              </div>
+
+              <div class="modal-body">
+                <label for="telefono">Telefono:</label>  
+                <input type="telefono" class="form-control" id="telefono" name="telefono" placeholder="Telefono">
+              </div>
+
+              <div class="modal-body">
+                <label for="privilegio">Privilegio:</label>
+                <select class="form-control" id="privilegio">
+                  <option>Encargada de Local</option>
+                  <option>Adm. Proveedor</option>
+                  <option>Vendedora</option>
+                </select>
+              </div>
+
+              <div class="modal-body">
+                <label for="estadoColaborador">Estado:</label>
+                <select class="form-control" id="estadoColab">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
+              </div>
+
+              <div class="modal-body">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -25,71 +25,33 @@ $( document ).ready(function() {
       })
   }
 
-  var editor; // use a global for the submit and return data rendering in the examples
-
   function tabla(datos){
-    editor = new $.fn.dataTable.Editor( {
-        "data": datos,
-        "table": "#tablaColaboradores",
-        idSrc:  'id_colaborador',
-        "fields": [ {
-                "label": "Nombre:",
-                "name": "nombre_colab"
-            }, {
-                "label": "Apellido:",
-                "name": "apellido_colab"
-            }, {
-                "label": "Correo:",
-                "name": "correo_colab"
-            }, {
-                "label": "Privilegio:",
-                "name": "id_privilegio"
-            }, {
-                "label": "Estado:",
-                "name": "id_estado"
-            }
-        ]
-    } );
- 
-    // New record * para crear un nuevo usuario
-    $('a.editor-create').on('click', function (e) {
-        e.preventDefault();
- 
-        editor.create( {
-            title: 'Crear nuevo Colaborador',
-            buttons: 'Agregar'
-        } );
-    } );
- 
-    // Edit record * crea un botton para editar los datos de mi tabla
-    $('#tablaColaboradores').on('click', 'td.editor-edit', function (e) {
-        e.preventDefault();
- 
-        editor.edit( $(this).closest('tr'), {
-            title: 'Editar Colaborador',
-            buttons: 'Guardar'
-        } );
-    } );
-    
-    var table = $('#tablaColaboradores').DataTable( {
-        data: datos,
-        columns: [
-            // { data: null, render: function ( data, type, row ) {
-            //     // Combine the first and last names into a single table field
-            //     return data.first_name+' '+data.last_name;
-            // } },
-            { data: "nombre_colab" },
-            { data: "apellido_colab" },
-            { data: "correo_colab" },
-            { data: "id_privilegio" },
-            { data: "id_estado"},
-            {
-                data: null,
-                className: "dt-center editor-edit",
-                defaultContent: '<i class="fas fa-user-edit">',
-                orderable: false
-            }
-        ],
-        language: espanol
-    });
+    console.log(datos);
+  $('#tablaColaboradores').DataTable( {
+      data: datos,
+      columns: [
+          { data: 'nombre_colab' },
+          { data: 'apellido_colab' },
+          { data: 'correo_colab' },
+          { data: 'telefono_colab' },
+          { data: 'id_privilegio' },
+          { data: 'id_estado'},
+          {    
+            render: function (data, type, row) {    
+            return createButton('edit', row.id);    
+          }    
+          },    
+      ],
+
+      language: espanol
+  } );   
+
+    function createButton(buttonType, rowID) {    
+                  return '<button onclick="modalEditar()" name="button"> <i class="fas fa-user-edit"></i>  </button>';    
+      }    
 }
+    function modalEditar(){
+        $('#miModal').modal('show') //muestra el modal
+
+        //$('#myModal').modal('hide') //esconde el modal
+    }
