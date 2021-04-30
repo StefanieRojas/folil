@@ -113,23 +113,31 @@
               <div class="modal-body">
                 <label for="privilegio">Privilegio:</label>
                 <select class="form-control" id="privilegio">
-                  <option>Encargada de Local</option>
-                  <option>Adm. Proveedor</option>
-                  <option>Vendedora</option>
+                  <option value="1">Encargada de Local</option>
+                  <option value="2">Adm. Proveedor</option>
+                  <option value="3">Vendedora</option>
                 </select>
               </div>
 
               <div class="modal-body">
                 <label for="estadoColaborador">Estado:</label>
                 <select class="form-control" id="estadoColab">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                  <option value="1"> Activo </option>
+                  <option value="2"> Desvinculado </option>
                 </select>
               </div>
 
               <div class="modal-body">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <label for="contraseña">Contraseña:</label>  
+                <input type="contraseña" class="form-control" id="contraseña" name="contraseña" placeholder="Contraseña">
+              </div>
+
+              <div class="modal-body"> 
+                <input id="id" name="idcol" type="hidden">
+              </div>
+
+              <div class="modal-body">
+                <button onclick="guardarColab()" type="submit" class="btn btn-primary">Guardar</button>
               </div>
 
             </div>

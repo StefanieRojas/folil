@@ -22,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/loginme', [LoginController::class, 'login']);
 Route::get('/obtenerProveedores', [ProveedorController::class, 'obtenerProveedores']);
+Route::middleware('auth:api')->post('/guardarColab', [ColaboradorController::class, 'guardarColab']);
 Route::middleware('auth:api')->post('/obtenerColaborador',[ColaboradorController::class, 'obtenerColaborador']);
