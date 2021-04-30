@@ -88,7 +88,8 @@ function tabla() {
 
     function modalEditar(row) {
 
-        console.log(row)
+        console.log(row) //.val() cuando el parentesis viene vacio obtiene info, cuando viene lleno asigna valor.
+        $("#tituloModal").html("Editar Colaborador")
         $("#id").val(listaColab[row].id_colaborador)
         $("#nombre").val(listaColab[row].nombre_colab)
         $("#apellido").val(listaColab[row].apellido_colab)
@@ -101,7 +102,7 @@ function tabla() {
         //$('#myModal').modal('hide') //esconde el modal
     }
 
-    function guardarColab(){
+    function guardarColab(){ 
         var colab = {
 
             "id_usuario" : localStorage.getItem("idColaborador"),
@@ -127,6 +128,8 @@ function tabla() {
                 
                 data = JSON.parse(datos)
                 obtenerColaborador()
+                $('#miModal').modal('hide')
+               
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Status: " + textStatus);
@@ -135,3 +138,21 @@ function tabla() {
         })
 
     }
+
+    function modalGuardar(){
+        //.val no funciona en etiquetas de texto (label h1/2/...)
+        //.html cambiar valores estaticos como los textos
+        $("#tituloModal").html("Nuevo Colaborador")
+        localStorage.getItem("idColaborador")
+        $("#id").val("-1")
+        $("#nombre").val("")
+        $("#apellido").val("")
+        $("#correo").val("")
+        $("#telefono").val("")
+        $("#privilegio").val("")
+        $("#estadoColab").val("")
+        $('#miModal').modal('show')
+        
+        
+        
+    } 

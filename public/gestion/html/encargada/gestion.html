@@ -18,6 +18,7 @@
   <script type="text/javascript" src="../../vendor/fontawesome/js/fontawesome.min.js"></script>
   <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/dataTables.select.min.js"></script>
   <script type="text/javascript" src="../../vendor/fontawesome/js/solid.min.js"></script>
+  <script type="text/javascript" src="../vendor/toastr/toastr.min.js"></script>
 
   <link href="../../vendor/DataTables/DataTables-1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="../../vendor/bootstrap4.6.0/css/bootstrap.min.css" rel="stylesheet">
@@ -28,6 +29,7 @@
   <link href="../../vendor/DataTables/DataTables-1.10.24/css/buttons.bootstrap4.min.css" rel="stylesheet">
   <link href="../../vendor/DataTables/DataTables-1.10.24/css/select.boostrap4.min.css" rel="stylesheet">
   <link href="../../vendor/fontawesome/css/solid.min.css" rel="stylesheet">
+  <link href="../vendor/toastr/toastr.min.css" rel="stylesheet">
   
 </head>
 <body>
@@ -78,13 +80,13 @@
     </table>
     </div>
     <div class="contenedor-modal">
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#miModal">Abrir modal</button>
+      <button onclick="modalGuardar()" type="button" class="btn btn-primary btn-lg" data-toggle="modal" >Abrir modal</button>
     </div>
      <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Editar Colaborador</h4>
+            <h4 class="modal-title" id="tituloModal"></h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -136,8 +138,9 @@
                 <input id="id" name="idcol" type="hidden">
               </div>
 
-              <div class="modal-body">
+              <div class="modal-footer">
                 <button onclick="guardarColab()" type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
               </div>
 
             </div>
