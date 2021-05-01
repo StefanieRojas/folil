@@ -80,7 +80,7 @@
     </table>
     </div>
     <div class="contenedor-modal">
-      <button onclick="modalGuardar()" type="button" class="btn btn-primary btn-lg" data-toggle="modal" >Abrir modal</button>
+      <button onclick="modalCrear()" type="button" class="btn btn-primary btn-lg" data-toggle="modal" >Abrir modal</button>
     </div>
      <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -115,6 +115,7 @@
               <div class="modal-body">
                 <label for="privilegio">Privilegio:</label>
                 <select class="form-control" id="privilegio">
+                  <option value="" disabled hidden selected>Seleccione...</option>
                   <option value="1">Encargada de Local</option>
                   <option value="2">Adm. Proveedor</option>
                   <option value="3">Vendedora</option>
@@ -124,6 +125,7 @@
               <div class="modal-body">
                 <label for="estadoColaborador">Estado:</label>
                 <select class="form-control" id="estadoColab">
+                  <option value="" disabled hidden selected>Seleccione...</option>
                   <option value="1"> Activo </option>
                   <option value="2"> Desvinculado </option>
                 </select>

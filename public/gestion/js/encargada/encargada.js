@@ -30,6 +30,11 @@ function obtenerColaborador() {
 
 function tabla() {
     console.log(listaColab);
+    if($.fn.DataTable.isDataTable("#tablaColaboradores")){
+
+        $("#tablaColaboradores").DataTable().destroy();
+
+    }
     $('#tablaColaboradores').DataTable({
             data: listaColab,
             columns: [{
@@ -87,8 +92,8 @@ function tabla() {
     }
 
     function modalEditar(row) {
-
-        console.log(row) //.val() cuando el parentesis viene vacio obtiene info, cuando viene lleno asigna valor.
+        //.val() cuando el parentesis viene vacio obtiene info, cuando viene lleno asigna valor.
+        console.log(row) 
         $("#tituloModal").html("Editar Colaborador")
         $("#id").val(listaColab[row].id_colaborador)
         $("#nombre").val(listaColab[row].nombre_colab)
@@ -97,6 +102,7 @@ function tabla() {
         $("#telefono").val(listaColab[row].telefono_colab)
         $("#privilegio").val(listaColab[row].id_privilegio)
         $("#estadoColab").val(listaColab[row].id_estado)
+        $("#contraseña").val(listaColab[row].password_colab)
         $('#miModal').modal('show') //muestra el modal
 
         //$('#myModal').modal('hide') //esconde el modal
@@ -112,7 +118,8 @@ function tabla() {
             "correo_colab" : $("#correo").val(),
             "telefono_colab" : $("#telefono").val(),
             "id_privilegio" : $("#privilegio").val(),
-            "id_estado" : $("#estadoColab").val()
+            "id_estado" : $("#estadoColab").val(),
+            "password_colab" :$("#contraseña").val()
 
         }
         
@@ -139,7 +146,7 @@ function tabla() {
 
     }
 
-    function modalGuardar(){
+    function modalCrear(){
         //.val no funciona en etiquetas de texto (label h1/2/...)
         //.html cambiar valores estaticos como los textos
         $("#tituloModal").html("Nuevo Colaborador")
@@ -151,8 +158,7 @@ function tabla() {
         $("#telefono").val("")
         $("#privilegio").val("")
         $("#estadoColab").val("")
+        $("#contraseña").val("")
         $('#miModal').modal('show')
-        
-        
-        
+              
     } 
