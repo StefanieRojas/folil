@@ -15,7 +15,7 @@ function obtenerColaborador() {
         url: webService + "/obtenerColaborador", //url guarda la ruta hacia donde se hace la peticion
         data: {
             id_colaborador: localStorage.getItem("idColaborador"),
-        }, // data recive un objeto con la informacion que se enviara al servidor
+        }, // data recibe un objeto con la informacion que se enviara al servidor
         success: function(datos) { //success es una funcion que se utiliza si el servidor retorna informacion
 
             listaColab = JSON.parse(datos)
@@ -105,7 +105,6 @@ function tabla() {
         $("#contraseña").val(listaColab[row].password_colab)
         $('#miModal').modal('show') //muestra el modal
 
-        //$('#myModal').modal('hide') //esconde el modal
     }
 
     function guardarColab(){ 
@@ -130,13 +129,19 @@ function tabla() {
             },
             dataType: "text",
             url: webService + "/guardarColab", //url guarda la ruta hacia donde se hace la peticion
-            data: colab, // data recive un objeto con la informacion que se enviara al servidor
+            data: colab, // data recibe un objeto con la informacion que se enviara al servidor
             success: function(datos) { //success es una funcion que se utiliza si el servidor retorna informacion
                 
                 data = JSON.parse(datos)
-                obtenerColaborador()
-                $('#miModal').modal('hide')
-               
+
+                if(data.respuesta != undefined && data.respuesta == "error"){
+                    toastr["error"](data.descripcion)
+                }
+                else{
+                    obtenerColaborador()
+                    $('#miModal').modal('hide')
+                    toastr["success"]("Los datos del colaborador han sido editados correctamente.", "Colaborador Editado")
+                }    
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Status: " + textStatus);
