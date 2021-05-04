@@ -31,10 +31,10 @@ function Login() {
             localStorage.setItem("nombreUsuario", datos.nombre_colab+" "+datos.apellido_colab);
 
             if(datos.id_privilegio==1){
-                window.location.href = web+"/encargada/gestion.html"
+                window.location.href = web+"/encargada/gestionColaborador.html"
             }
             else if(datos.id_privilegio==2){
-                window.location.href = web+"/admprov/index.html"
+                window.location.href = web+"/admProv/gestionProveedor.html"
             }
             else if(datos.id_privilegio==3){
                 window.location.href = web+"/vendedora/index.html"

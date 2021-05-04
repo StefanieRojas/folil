@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    obtenerColaborador()
+    obtenerColaborador() //aqui llama a la funcion obtenerColaborador, asi que apenas cargue la pagina esto sera lo primero que enseñe
     
 });
 
@@ -19,7 +19,7 @@ function obtenerColaborador() {
         success: function(datos) { //success es una funcion que se utiliza si el servidor retorna informacion
 
             listaColab = JSON.parse(datos)
-            tabla()
+            tabla() //aqui llamamos a la funcion de la tabla
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Status: " + textStatus);
