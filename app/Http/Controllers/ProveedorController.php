@@ -39,15 +39,6 @@ class ProveedorController extends Controller
         }
         //a la variable $ le estoy entregando todo lo que esta en la base de datos de su respectivo nombre
         $proveedor=Proveedor::all();
-        $listacategoria=Categoria::all();
-
-        foreach ($proveedor as $clave => $valor) {
-           
-            $categoriaSeleccionada = $listacategoria->where('id_categoria', $proveedor[$clave]->id_categoria)->first();
-            $proveedor[$clave]->categoria = $categoriaSeleccionada->categoria;
-
-        }
-
         return response()->json($proveedor);
     }
 
@@ -56,13 +47,12 @@ class ProveedorController extends Controller
         $post = $request->all(); //agarra todo lo que le estoy enviando del navegador, lo que va en el ajax
         $validator = Validator::make($post, [
             "id_usuario" => 'required|numeric',
-            "id_proveedor" => 'required|numeric', 
+            "id_prov" => 'required|numeric', 
             "nombre_prov" => 'required|string',
             "apellido_prov" => 'required|string',
             "direccion_prov" => 'required|string',
             "telefono_prov" => 'required|numeric',
             "correo_prov" => 'required|string',
-            "id_categoria" => 'required|numeric',
             "id_estado_prov" => 'required|numeric',
             "id_calificacion" => 'required|numeric'
         ],$messages = [
@@ -74,7 +64,7 @@ class ProveedorController extends Controller
             return response()->json(array("respuesta"=>"error","descripcion"=>$validator->errors()),422); 
         }
         //nose para que es esto :o
-        $idProveedor = trim($post["id_proveedor"]);
+        $idProveedor = trim($post["id_prov"]);
         $idUsuario = trim($post["id_usuario"]); //guardando en la variable $id el id_colab que esta en el $post
         $usuario = Colaborador::where('id_colaborador', $idUsuario)->first(); 
                                      
@@ -95,7 +85,7 @@ class ProveedorController extends Controller
              //validar si el id que les estamos mandando es igual a -1 no tiene que buscar, sino crear un colaborador
             //where() compara una columna con los resultados de una subconsulta.
             //->first() Trae el primer modelo que coincida con las restricciones de la consulta ...
-            $proveedor = Proveedor::where('id_proveedor',$idProveedor)->first(); 
+            $proveedor = Proveedor::where('id_prov',$idProveedor)->first(); 
 
             if(!isset($proveedor)){ //isset comprueba si una variable está definida o no en el script de PHP que se está ejecutando
                 return response()->json(array("respuesta"=>"error","descripcion"=>"Tu proveedor no existe."));
@@ -107,8 +97,7 @@ class ProveedorController extends Controller
         $proveedor->apellido_prov = trim($post["apellido_prov"]);
         $proveedor->direccion_prov = trim($post["direccion_prov"]);
         $proveedor->telefono_prov = trim($post["telefono_prov"]);   
-        $proveedor->correo_prov = trim($post["correo_prov"]);      
-        $proveedor->id_categoria = trim($post["id_categoria"]);     
+        $proveedor->correo_prov = trim($post["correo_prov"]);          
         $proveedor->id_estado_prov = trim($post["id_estado_prov"]);  
         $proveedor->id_calificacion = trim($post["id_calificacion"]);  
             

@@ -52,9 +52,6 @@ function tabla() {
                     data: 'correo_prov'
                 },
                 {
-                    data: 'categoria'
-                },
-                {
                     data: 'id_estado_prov',
                     render: function(data) {
                         if (data == 1) {
@@ -95,7 +92,6 @@ function tabla() {
         $("#direccion").val(listaProveedor[row].direccion_prov)
         $("#telefono").val(listaProveedor[row].telefono_prov)
         $("#correo").val(listaProveedor[row].correo_prov)
-        $("#categoriaProv").val(listaProveedor[row].id_categoria)
         $("#estadoProv").val(listaProveedor[row].id_estado_prov)
         $("#calificacion").val(listaProveedor[row].id_calificacion)
         $('#miModal').modal('show') //muestra el modal
@@ -112,7 +108,6 @@ function tabla() {
             "direccion_prov" : $("#direccion").val(),
             "telefono_prov" : $("#telefono").val(),
             "correo_prov" : $("#correo").val(),
-            "id_categoria" : $("#categoriaProv").val(),
             "id_estado_prov" : $("#estadoProv").val(),
             "id_calificacion" : $("#calificacion").val()
 
@@ -158,7 +153,6 @@ function tabla() {
         $("#direccion").val("")
         $("#telefono").val("")
         $("#correo").val("")
-        $("#categoriaProv").val("")
         $("#estadoProv").val("")
         $("#calificacion").val("")
         $('#miModal').modal('show')

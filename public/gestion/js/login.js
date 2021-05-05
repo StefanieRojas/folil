@@ -37,7 +37,7 @@ function Login() {
                 window.location.href = web+"/admProv/gestionProveedor.html"
             }
             else if(datos.id_privilegio==3){
-                window.location.href = web+"/vendedora/index.html"
+                window.location.href = web+"/vendedora/gestionPedido.html"
             }
 
         },

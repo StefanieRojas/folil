@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ColaboradorController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\LoginController;
 
 /*
@@ -29,3 +30,5 @@ Route::middleware('auth:api')->post('/guardarCategoria', [CategoriaController::c
 Route::middleware('auth:api')->post('/obtenerCategoria',[CategoriaController::class, 'obtenerCategoria']);
 Route::middleware('auth:api')->post('/guardarProveedor', [ProveedorController::class, 'guardarProveedor']);
 Route::middleware('auth:api')->post('/obtenerProveedores',[ProveedorController::class, 'obtenerProveedores']);
+Route::middleware('auth:api')->post('/guardarPedido', [PedidoController::class, 'guardarPedido']);
+Route::middleware('auth:api')->post('/obtenerPedidos',[PedidoController::class, 'obtenerPedidos']);
