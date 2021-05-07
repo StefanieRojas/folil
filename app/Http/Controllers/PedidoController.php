@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Colaborador;
+use App\Models\Categoria;
 use App\Models\Proveedor;
+use App\Models\Producto;
 use App\Models\Pedido;
 use App\Models\Abono;
 use Illuminate\Support\Facades\Validator;
@@ -39,19 +41,27 @@ class PedidoController extends Controller
             return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
         }
 
+        $listaCategoria=Categoria::all();
+        $listaProducto=Producto::all();
         $pedido=Pedido::all();
         $listaProveedor=Proveedor::all();
         $mostrarAbono=Abono::all();
+
+        foreach ($listaCategoria as $clave => $valor){
+
+            $listaCategoria[$clave]->productos = $listaProducto->where('id_categoria', $listaCategoria[$clave]->id_categoria);
+        
+        }
 
         foreach ($pedido as $clave => $valor) {
            
             $proveedorSeleccionado = $listaProveedor->where('id_prov', $pedido[$clave]->id_prov)->first();
             $pedido[$clave]->nombre_prov = $proveedorSeleccionado->nombre_prov;
-            $abonoSeleccionado = $mostrarAbono->where('id_abono', $pedido[$clave]->id_abono)->first();
-            $pedido[$clave]->monto_abono = $abonoSeleccionado->monto_abono;
+            // $categoriaSeleccionado = $mostrarCategoria->where('id_categoria', $pedido[$clave]->id_abono)->first();
+            // $pedido[$clave]->monto_abono = $abonoSeleccionado->monto_abono;
 
         }
-        
+        $json["categoria"] = $listaCategoria;
         $json["pedido"] = $pedido;
         $json["proveedores"] = $listaProveedor;
         return response()->json($json);
@@ -73,7 +83,6 @@ class PedidoController extends Controller
             "id_prov" => 'required|numeric',
             "id_confirmacion" => 'required|numeric',
             "id_estado" => 'required|numeric',
-            "id_abono" => 'required|numeric',
             "cantidad_producto" => 'required|numeric'
         ],$messages = [
             'required' => 'El :attribute es requerido.',
@@ -123,7 +132,6 @@ class PedidoController extends Controller
         $pedido->id_prov = trim($post["id_prov"]);
         $pedido->id_confirmacion = trim($post["id_confirmacion"]);
         $pedido->id_estado = trim($post["id_estado"]);
-        $pedido->id_abono = trim($post["id_abono"]);
         $pedido->cantidad_producto = trim($post["cantidad_producto"]);        
         try {
             $pedido->save(); //aqui guarda la informacion que ingrese en el modal

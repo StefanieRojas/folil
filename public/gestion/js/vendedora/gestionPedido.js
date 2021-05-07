@@ -4,6 +4,7 @@ $(document).ready(function() {
 
 listaPedidos = null;
 listaProveedor = null;
+listaCategoria = null;
 
 function obtenerPedidos() {
     $.ajax({
@@ -20,6 +21,7 @@ function obtenerPedidos() {
 
             listaPedidos = JSON.parse(datos).pedido //aqui estoy guardando solo los pedidos
             listaProveedor = JSON.parse(datos).proveedores //aqui estoy guardando a los proveedores
+            listaCategoria = JSON.parse(datos).categoria
             tabla()
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -46,6 +48,9 @@ function tabla() {
                 },
                 {
                     data: 'telefono_solicitante'
+                },
+                {
+                    data: 'categoria'
                 },
                 {
                     data: 'producto'
@@ -99,9 +104,6 @@ function tabla() {
                         }
                     }
                 },
-                {
-                    data: 'monto_abono'
-                },
                     {
                         render: function(data, type, row, meta) {
                             //console.log(row)
@@ -118,13 +120,42 @@ function tabla() {
             return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-edit"></i></i>  </button>';
         }
 
-        for(var $contar = 0; $contar < listaProveedor.length; $contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
+        for(var contar = 0; contar < listaProveedor.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
             //length es para saber que tan largo es un array
-            console.log(listaProveedor[$contar].nombre_prov);//aqui imprimo los nombres de los proveedores que ahi (contar agarra todo lo que tengo dentro y me lo trae)
+            //concatenar texto con variables ( '" + "' )
+            var lista = "<option value='" + listaProveedor[contar].id_prov + "'>" + listaProveedor[contar].nombre_prov + "</option>";
+            $("#proveedor").append(lista);
+           // listaProveedor[$contar].nombre_prov//aqui imprimo los nombres de los proveedores que ahi (contar agarra todo lo que tengo dentro y me lo trae)
+        }
+
+        
+        for(var contar = 0; contar < listaCategoria.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
+            //length es para saber que tan largo es un array
+            //concatenar texto con variables ( '" + "' )
+            var lista = "<option value='" + contar + "'>" + listaCategoria[contar].categoria + "</option>";
+            $("#categoria").append(lista);
+           // este option me trae el valor del array (0 hasta donde dure)  mas el nombre de mi categoria
         }
 
     }
 
+    //SEGUIR AQUI, PORQUE AUN NO LA TERMINO
+    function cargarProductos(){
+        //me guarda la posicion de la categoria que seleccione en mi select 
+        valorSelect =  $("#categoria").val()
+        $("#producto").empty();
+        $("#producto").prepend('<option value="" disabled hidden selected>Seleccione...</option>');
+
+        //el FOR recorre el arreglo de productos de las categorias que seleccione
+        for(var contar = 0; contar < listaCategoria[valorSelect].productos.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
+            
+            
+            //length es para saber que tan largo es un array
+            //concatenar texto con variables ( '" + "' )
+            var lista = "<option value='" + (listaCategoria[valorSelect].productos).id_producto + "'>" + listaCategoria[valorSelect].productos[contar].nombre_producto + "</option>";
+            $("#producto").append(lista);
+        }
+    }
 
 
     function modalEditar(row) { //aqui se crea una modal para editar la categoria, dentro de los inputs ("#nombredelinput") se le asigno el valor que enseñaran
@@ -135,15 +166,15 @@ function tabla() {
         $("#nombre").val(listaPedidos[row].nombre_solicitante)
         $("#correo").val(listaPedidos[row].correo_solicitante)
         $("#telefono").val(listaPedidos[row].telefono_solicitante)
+        $("#categoria").val(listaPedidos[row].categoria)
         $("#producto").val(listaPedidos[row].producto)
-        $("#cantidad").val(listaPedidos[row].producto)
+        $("#cantidad").val(listaPedidos[row].cantidad_producto)
         $("#descripcion").val(listaPedidos[row].descripcion_prod)
         $("#tipoSolicitud").val(listaPedidos[row].tipo_solicitud)
         $("#precio").val(listaPedidos[row].precio_pedido)
         $("#proveedor").val(listaPedidos[row].nombre_prov)
         $("#confirmacion").val(listaPedidos[row].id_confirmacion)
         $("#estado").val(listaPedidos[row].id_estado)
-        $("#abono").val(listaPedidos[row].monto_abono)
         $('#miModal').modal('show') //muestra el modal
 
     }
@@ -156,15 +187,15 @@ function tabla() {
             "nombre_solicitante" : $("#nombre").val(),
             "correo_solicitante" : $("#correo").val(),
             "telefono_solicitante" : $("#telefono").val(),
+            "cantidad" : $("#cantidad").val(),
             "producto" : $("#producto").val(),
-            "cantidad_producto" : $("#producto").val(),
+            "cantidad_producto" : $("#cantidad").val(),
             "descripcion_prod" : $("#descripcion").val(),
             "tipo_solicitud" : $("#tipoSolicitud").val(),
             "precio_pedido" : $("#precio").val(),
-            "nombre_prov" : $("#proveedor").val(),
+            "id_prov" : $("#proveedor").val(),
             "id_confirmacion" :  $("#confirmacion").val(),
-            "id_estado" : $("#estado").val(),
-            "monto_abono" : $("#abono").val()
+            "id_estado" : $("#estado").val()
 
         }
         
@@ -184,7 +215,7 @@ function tabla() {
                     toastr["error"](data.descripcion)
                 }
                 else{
-                    obtenerCategoria()
+                    obtenerPedidos()
                     $('#miModal').modal('hide')
                     toastr["success"]("El pedido ha sido editado correctamente.", "Pedido Editado")
                 }    
@@ -206,6 +237,7 @@ function tabla() {
         $("#nombre").val("")
         $("#correo").val("")
         $("#telefono").val("")
+        $("#categoria").val("")
         $("#producto").val("")
         $("#cantidad").val("")
         $("#descripcion").val("")
@@ -214,7 +246,6 @@ function tabla() {
         $("#proveedor").val("")
         $("#confirmacion").val("")
         $("#estado").val("")
-        $("#abono").val("")
         $('#miModal').modal('show')
               
     } 
