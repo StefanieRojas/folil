@@ -14,7 +14,7 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function obtenerProducto()
+    public function obtenerProducto(Request $request)
     {
         $post = $request->all(); //agarra todo lo que le estoy enviando del navegador, lo que va en el ajax
         $validator = Validator::make($post, [ //aqui estoy validando mis datos, en este caso que id es requerido y es tipo numerico
@@ -37,8 +37,8 @@ class ProductoController extends Controller
             return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
         }
 
-        $categoria=Categoria::all();
-        return response()->json($categoria);
+        $producto=Producto::all();
+        return response()->json($producto);
     }
 
     public function guardarCategoria(Request $request)

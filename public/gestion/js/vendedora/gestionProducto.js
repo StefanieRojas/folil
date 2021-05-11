@@ -89,14 +89,14 @@ function tabla() {
         //.val() cuando el parentesis viene vacio obtiene info, cuando viene lleno asigna valor.
         console.log(row) 
         $("#tituloModal").html("Editar Producto")
-        $("#id").val(listaCategoria[row].id_producto)
-        $("#producto").val(listaCategoria[row].nombre_producto)
-        $("#stock").val(listaCategoria[row].stock)
-        $("#precioProducto").val(listaCategoria[row].precio_producto)
-        $("#precioTienda").val(listaCategoria[row].precio_tienda)
-        $("#proveedor").val(listaCategoria[row].id_prov)
-        $("#ubicacion").val(listaCategoria[row].id_ubicacion)
-        $("#categoria").val(listaCategoria[row].id_categoria)
+        $("#idprod").val(listaProducto[row].id_producto)
+        $("#producto").val(listaProducto[row].nombre_producto)
+        $("#stock").val(listaProducto[row].stock)
+        $("#precioProducto").val(listaProducto[row].precio_producto)
+        $("#precioTienda").val(listaProducto[row].precio_tienda)
+        $("#proveedor").val(listaProducto[row].id_prov)
+        $("#ubicacion").val(listaProducto[row].id_ubicacion)
+        $("#categoria").val(listaProducto[row].id_categoria)
         $('#miModal').modal('show') //muestra el modal
 
     }
@@ -105,7 +105,7 @@ function tabla() {
         var producto = {
 
             "id_usuario" : localStorage.getItem("idColaborador"), //es para asegurarme que el usuario que se logeo pueda Guardar/Editar esto
-            "id_producto" : $("#id").val(),
+            "id_producto" : $("#idprod").val(),
             "nombre_producto" : $("#producto").val(),
             "stock" : $("#stock").val(),
             "precio_producto" : $("#precioProducto").val(),
@@ -150,14 +150,14 @@ function tabla() {
         //.html cambiar valores estaticos como los textos
         $("#tituloModal").html("Nuevo Producto")
         localStorage.getItem("idColaborador")
-        $("#id").val("-1")
-        $("#producto").val()
-        $("#stock").val()
-        $("#precioProducto").val()
-        $("#precioTienda").val()
-        $("#proveedor").val()
-        $("#ubicacion").val()
-        $("#categoria").val()
+        $("#idprod").val("-1")
+        $("#producto").val("")
+        $("#stock").val("")
+        $("#precioProducto").val("")
+        $("#precioTienda").val("")
+        $("#proveedor").val("")
+        $("#ubicacion").val("")
+        $("#categoria").val("")
         $('#miModal').modal('show')
               
     } 

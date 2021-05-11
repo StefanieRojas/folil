@@ -99,7 +99,7 @@ function tabla() {
     }
 
     function guardarProveedor(){ 
-        var categoria = {
+        var proveedor = {
 
             "id_usuario" : localStorage.getItem("idColaborador"), //es para asegurarme que el usuario que se logeo pueda Guardar/Editar esto
             "id_prov" : $("#id").val(),
@@ -120,7 +120,7 @@ function tabla() {
             },
             dataType: "text",
             url: webService + "/guardarProveedor", //url guarda la ruta hacia donde se hace la peticion
-            data: categoria, // data recibe un objeto con la informacion que se enviara al servidor
+            data: proveedor, // data recibe un objeto con la informacion que se enviara al servidor
             success: function(datos) { //success es una funcion que se utiliza si el servidor retorna informacion
                 
                 data = JSON.parse(datos)

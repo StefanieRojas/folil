@@ -53,7 +53,7 @@ function tabla() {
                     data: 'categoria'
                 },
                 {
-                    data: 'producto'
+                    data: 'nombre_producto'
                 },
                 {
                     data: 'cantidad_producto'
@@ -132,27 +132,36 @@ function tabla() {
         for(var contar = 0; contar < listaCategoria.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
             //length es para saber que tan largo es un array
             //concatenar texto con variables ( '" + "' )
-            var lista = "<option value='" + contar + "'>" + listaCategoria[contar].categoria + "</option>";
+            var lista = "<option value='" + listaCategoria[contar].id_categoria + "' data-pos= '" + contar +"'>" + listaCategoria[contar].categoria + "</option>";
             $("#categoria").append(lista);
            // este option me trae el valor del array (0 hasta donde dure)  mas el nombre de mi categoria
         }
 
     }
 
-    //SEGUIR AQUI, PORQUE AUN NO LA TERMINO
     function cargarProductos(){
         //me guarda la posicion de la categoria que seleccione en mi select 
-        valorSelect =  $("#categoria").val()
+        
+        var posicion = document.getElementById('categoria');
+        console.log( posicion.selectedIndex);
+        var selectIndex= posicion.selectedIndex == "-1"?"0":posicion.selectedIndex; 
+        console.log(selectIndex);
+        valorSelect =  posicion.options[selectIndex].getAttribute("data-pos") == null?"0":posicion.options[selectIndex].getAttribute("data-pos");
+        console.log(valorSelect)
+        //Aqui estoy guardando la posicion de mi categoria  
+        
+
         $("#producto").empty();
         $("#producto").prepend('<option value="" disabled hidden selected>Seleccione...</option>');
-
+        
         //el FOR recorre el arreglo de productos de las categorias que seleccione
+        console.log(listaCategoria)
         for(var contar = 0; contar < listaCategoria[valorSelect].productos.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
             
             
             //length es para saber que tan largo es un array
             //concatenar texto con variables ( '" + "' )
-            var lista = "<option value='" + (listaCategoria[valorSelect].productos).id_producto + "'>" + listaCategoria[valorSelect].productos[contar].nombre_producto + "</option>";
+            var lista = "<option value='" + listaCategoria[valorSelect].productos[contar].id_producto + "'>" + listaCategoria[valorSelect].productos[contar].nombre_producto + "</option>";
             $("#producto").append(lista);
         }
     }
@@ -166,13 +175,14 @@ function tabla() {
         $("#nombre").val(listaPedidos[row].nombre_solicitante)
         $("#correo").val(listaPedidos[row].correo_solicitante)
         $("#telefono").val(listaPedidos[row].telefono_solicitante)
-        $("#categoria").val(listaPedidos[row].categoria)
-        $("#producto").val(listaPedidos[row].producto)
+        $("#categoria").val(listaPedidos[row].id_categoria) 
+        $('#categoria').change();
+        $("#producto").val(listaPedidos[row].id_producto)
         $("#cantidad").val(listaPedidos[row].cantidad_producto)
         $("#descripcion").val(listaPedidos[row].descripcion_prod)
         $("#tipoSolicitud").val(listaPedidos[row].tipo_solicitud)
         $("#precio").val(listaPedidos[row].precio_pedido)
-        $("#proveedor").val(listaPedidos[row].nombre_prov)
+        $("#proveedor").val(listaPedidos[row].id_prov)
         $("#confirmacion").val(listaPedidos[row].id_confirmacion)
         $("#estado").val(listaPedidos[row].id_estado)
         $('#miModal').modal('show') //muestra el modal
@@ -187,8 +197,8 @@ function tabla() {
             "nombre_solicitante" : $("#nombre").val(),
             "correo_solicitante" : $("#correo").val(),
             "telefono_solicitante" : $("#telefono").val(),
-            "cantidad" : $("#cantidad").val(),
-            "producto" : $("#producto").val(),
+            "categoria" : $("#categoria").val(),
+            "nombre_producto" : $("#producto").val(),
             "cantidad_producto" : $("#cantidad").val(),
             "descripcion_prod" : $("#descripcion").val(),
             "tipo_solicitud" : $("#tipoSolicitud").val(),
@@ -247,5 +257,7 @@ function tabla() {
         $("#confirmacion").val("")
         $("#estado").val("")
         $('#miModal').modal('show')
+        $("#producto").empty();
+        $("#producto").prepend('<option value="" disabled hidden selected>Seleccione...</option>');
               
     } 

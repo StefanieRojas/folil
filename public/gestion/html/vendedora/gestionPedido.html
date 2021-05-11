@@ -138,7 +138,13 @@
 
               <div class="modal-body">
                 <label for="tipoSolicitud">Tipo Solicitud:</label>  
-                <input type="tipoSolicitud" class="form-control" id="tipoSolicitud" name="tipoSolicitud" placeholder="Solicitud">
+                <select class="form-control" id="tipoSolicitud">
+                  <option value="" disabled hidden selected>Seleccione...</option>
+                  <option value="Via Tienda">Via Tienda</option>
+                  <option value="Via Correo">Via Correo</option>
+                  <option value="Via Feria">Via Feria</option>
+                  <option value="Via Telefono">Via Telefono</option>
+                </select>
               </div>
 
               <div class="modal-body">
@@ -176,7 +182,7 @@
               </div>
 
               <div class="modal-body"> 
-                <input id="id" name="idcol" type="hidden">
+                <input id="id" name="id" type="hidden">
               </div>
 
               <div class="modal-footer">

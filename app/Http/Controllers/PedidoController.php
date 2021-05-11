@@ -45,25 +45,35 @@ class PedidoController extends Controller
         $listaProducto=Producto::all();
         $pedido=Pedido::all();
         $listaProveedor=Proveedor::all();
-        $mostrarAbono=Abono::all();
+
+        foreach($pedido as $clave => $valor){
+            $buscar = Producto::select('id_categoria')->where('id_producto', $pedido[$clave]->id_producto)->first();
+            $pedido[$clave]-> id_categoria = $buscar->id_categoria;
+
+        }
 
         foreach ($listaCategoria as $clave => $valor){
 
-            $listaCategoria[$clave]->productos = $listaProducto->where('id_categoria', $listaCategoria[$clave]->id_categoria);
-        
+            $listaCategoria[$clave]->productos = Producto::where('id_categoria', $listaCategoria[$clave]->id_categoria)->get();
+    
         }
 
         foreach ($pedido as $clave => $valor) {
            
             $proveedorSeleccionado = $listaProveedor->where('id_prov', $pedido[$clave]->id_prov)->first();
             $pedido[$clave]->nombre_prov = $proveedorSeleccionado->nombre_prov;
-            // $categoriaSeleccionado = $mostrarCategoria->where('id_categoria', $pedido[$clave]->id_abono)->first();
-            // $pedido[$clave]->monto_abono = $abonoSeleccionado->monto_abono;
+            $categoriaSeleccionada = $listaCategoria->where('id_categoria', $pedido[$clave]->id_categoria)->first();
+            $pedido[$clave]->categoria = $categoriaSeleccionada->categoria;
+            $pedido[$clave]->id_categoria = $categoriaSeleccionada->id_categoria;
+            $productoSeleccionado = $listaProducto->where('id_producto', $pedido[$clave]->id_producto)->first();
+            $pedido[$clave]->nombre_producto = $productoSeleccionado->nombre_producto;
+            $pedido[$clave]->id_producto = $productoSeleccionado->id_producto;
 
         }
         $json["categoria"] = $listaCategoria;
         $json["pedido"] = $pedido;
         $json["proveedores"] = $listaProveedor;
+//$json["productos"] = $listaProducto;
         return response()->json($json);
     }
 
@@ -76,14 +86,13 @@ class PedidoController extends Controller
             "nombre_solicitante" => 'required|string',
             "correo_solicitante" => 'required|string',
             "telefono_solicitante" => 'required|numeric',
-            "producto" => 'required|string',
-            "descripcion_prod" => 'required|string',
             "tipo_solicitud" => 'required|string',
             "precio_pedido" => 'required|numeric',
             "id_prov" => 'required|numeric',
             "id_confirmacion" => 'required|numeric',
             "id_estado" => 'required|numeric',
-            "cantidad_producto" => 'required|numeric'
+            "cantidad_producto" => 'required|numeric',
+            "id_producto" => 'required|numeric'
         ],$messages = [
             'required' => 'El :attribute es requerido.',
             'numeric' => 'El :attribute debe ser numerico.',
@@ -125,13 +134,13 @@ class PedidoController extends Controller
         $pedido->nombre_solicitante = trim($post["nombre_solicitante"]);
         $pedido->correo_solicitante = trim($post["correo_solicitante"]);
         $pedido->telefono_solicitante = trim($post["telefono_solicitante"]);
-        $pedido->producto = trim($post["producto"]);
         $pedido->descripcion_prod = trim($post["descripcion_prod"]);
         $pedido->tipo_solicitud = trim($post["tipo_solicitud"]);
         $pedido->precio_pedido = trim($post["precio_pedido"]);
         $pedido->id_prov = trim($post["id_prov"]);
         $pedido->id_confirmacion = trim($post["id_confirmacion"]);
         $pedido->id_estado = trim($post["id_estado"]);
+        $pedido->id_producto = trim($post["id_producto"]);
         $pedido->cantidad_producto = trim($post["cantidad_producto"]);        
         try {
             $pedido->save(); //aqui guarda la informacion que ingrese en el modal
