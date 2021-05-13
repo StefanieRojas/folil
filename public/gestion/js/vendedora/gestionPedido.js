@@ -31,6 +31,30 @@ function obtenerPedidos() {
     })
 }
 
+function obtenerProvporCategoria(){
+        $.ajax({
+            type: "POST", // la variable type guarda el tipo de la peticion GET,POST,..
+            headers: {
+                't': localStorage.getItem("token")
+            },
+            dataType: "text",
+            url: webService + "/obtenerProvporCategoria", //url guarda la ruta hacia donde se hace la peticion
+            data: {
+                id_colaborador: localStorage.getItem("idColaborador"),
+                id_categoria: localStorage.getItem("idCategoria"),
+            }, // data recibe un objeto con la informacion que se enviara al servidor
+            success: function(datos) { //success es una funcion que se utiliza si el servidor retorna informacion
+    
+                listaProveedor = JSON.parse(datos).proveedores //aqui estoy guardando a los proveedores
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown);
+            }
+        })
+    }
+
 function tabla() {
     console.log(listaPedidos);
     if($.fn.DataTable.isDataTable("#tablaPedidos")){
@@ -53,7 +77,7 @@ function tabla() {
                     data: 'categoria'
                 },
                 {
-                    data: 'nombre_producto'
+                    data: 'id_producto'
                 },
                 {
                     data: 'cantidad_producto'
@@ -198,7 +222,7 @@ function tabla() {
             "correo_solicitante" : $("#correo").val(),
             "telefono_solicitante" : $("#telefono").val(),
             "categoria" : $("#categoria").val(),
-            "nombre_producto" : $("#producto").val(),
+            "id_producto" : $("#producto").val(),
             "cantidad_producto" : $("#cantidad").val(),
             "descripcion_prod" : $("#descripcion").val(),
             "tipo_solicitud" : $("#tipoSolicitud").val(),
@@ -227,7 +251,7 @@ function tabla() {
                 else{
                     obtenerPedidos()
                     $('#miModal').modal('hide')
-                    toastr["success"]("El pedido ha sido editado correctamente.", "Pedido Editado")
+                    toastr["success"](data.descripcion)
                 }    
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {

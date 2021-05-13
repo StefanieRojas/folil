@@ -106,7 +106,7 @@ function tabla() {
                 else{
                     obtenerCategoria()
                     $('#miModal').modal('hide')
-                    toastr["success"]("La categoria ha sido editada correctamente.", "Categoria Editada")
+                    toastr["success"](data.descripcion)
                 }    
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {

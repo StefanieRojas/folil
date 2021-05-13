@@ -161,6 +161,42 @@ class PedidoController extends Controller
         return response()->json($pedido);
     }
 
+    public function obtenerProvporCategoria(Request $request)
+    {
+        $post = $request->all(); //agarra todo lo que le estoy enviando del navegador, lo que va en el ajax
+        $validator = Validator::make($post, [
+            "id_usuario" => 'required|numeric',
+            "id_categoria" => 'required|numeric'
+        ],$messages = [
+            'required' => 'El :attribute es requerido.',
+            'numeric' => 'El :attribute debe ser numerico.'
+        ]);
+        if ($validator->fails()) {
+            return response()->json(array("respuesta"=>"error","descripcion"=>$validator->errors()),422); 
+        }
+        //nose para que es esto :o
+        $idCategoria = trim($post["id_categoria"]);
+        $idUsuario = trim($post["id_usuario"]); //guardando en la variable $id el id_colab que esta en el $post
+        $usuario = Colaborador::where('id_colaborador', $idUsuario)->first(); 
+                                     
+        if(!isset($usuario)){ //isset comprueba si una variable está definida o no en el script de PHP que se está ejecutando
+            return response()->json(array("respuesta"=>"error","descripcion"=>"Tu usuario no existe."));
+        }
+
+        if($usuario->id_privilegio != 3){
+            return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
+        }
+
+        $sql = 'SELECT DISTINCT p.id_prov, p.nombre_prov 
+        FROM proveedor p
+        JOIN producto pr
+        ON
+        p.id_prov = pr.id_prov';
+        $prov = DB::select($sql);
+        return $prov;
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      *

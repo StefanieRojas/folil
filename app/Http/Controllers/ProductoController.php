@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Colaborador;
+use App\Models\Proveedor;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\Validator;
 
 class ProductoController extends Controller
@@ -37,11 +39,17 @@ class ProductoController extends Controller
             return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
         }
 
-        $producto=Producto::all();
-        return response()->json($producto);
+        $listaCategoria=Categoria::all();
+        $listaproducto=Producto::all();
+        $listaProveedor=Proveedor::all();
+
+        $json["categoria"] = $listaCategoria;
+        $json["producto"] = $listaproducto;
+        $json["proveedores"] = $listaProveedor;
+        return response()->json($json);
     }
 
-    public function guardarCategoria(Request $request)
+    public function guardarProducto(Request $request)
     {
         $post = $request->all(); //agarra todo lo que le estoy enviando del navegador, lo que va en el ajax
         $validator = Validator::make($post, [

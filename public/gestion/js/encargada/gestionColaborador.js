@@ -140,7 +140,7 @@ function tabla() {
                 else{
                     obtenerColaborador()
                     $('#miModal').modal('hide')
-                    toastr["success"]("Los datos del colaborador han sido editados correctamente.", "Colaborador Editado")
+                    toastr["success"](data.descripcion)
                 }    
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {

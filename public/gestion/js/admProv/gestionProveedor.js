@@ -131,7 +131,7 @@ function tabla() {
                 else{
                     obtenerProveedores()
                     $('#miModal').modal('hide')
-                    toastr["success"]("El proveedor ha sido editado correctamente.", "Proveedor Editado")
+                    toastr["success"](data.descripcion)
                 }    
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
