@@ -43,6 +43,17 @@ class ProductoController extends Controller
         $listaproducto=Producto::all();
         $listaProveedor=Proveedor::all();
 
+        foreach ($listaproducto as $clave => $valor) {
+           
+            $proveedorSeleccionado = $listaProveedor->where('id_prov', $listaproducto[$clave]->id_prov)->first();
+            $listaproducto[$clave]->nombre_prov = $proveedorSeleccionado->nombre_prov;
+            $listaproducto[$clave]->id_prov = $proveedorSeleccionado->id_prov;
+            $categoriaSeleccionada = $listaCategoria->where('id_categoria', $listaproducto[$clave]->id_categoria)->first();
+            $listaproducto[$clave]->categoria = $categoriaSeleccionada->categoria;
+            $listaproducto[$clave]->id_categoria = $categoriaSeleccionada->id_categoria;
+
+        }
+
         $json["categoria"] = $listaCategoria;
         $json["producto"] = $listaproducto;
         $json["proveedores"] = $listaProveedor;

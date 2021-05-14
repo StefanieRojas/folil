@@ -30,6 +30,7 @@ Route::middleware('auth:api')->post('/obtenerColaborador',[ColaboradorController
 Route::middleware('auth:api')->post('/guardarCategoria', [CategoriaController::class, 'guardarCategoria']);
 Route::middleware('auth:api')->post('/obtenerCategoria',[CategoriaController::class, 'obtenerCategoria']);
 Route::middleware('auth:api')->post('/guardarProveedor', [ProveedorController::class, 'guardarProveedor']);
+Route::middleware('auth:api')->post('/guardarCalificacion', [ProveedorController::class, 'guardarCalificacion']);
 Route::middleware('auth:api')->post('/obtenerProveedores',[ProveedorController::class, 'obtenerProveedores']);
 Route::middleware('auth:api')->post('/guardarPedido', [PedidoController::class, 'guardarPedido']);
 Route::middleware('auth:api')->post('/obtenerPedidos',[PedidoController::class, 'obtenerPedidos']);

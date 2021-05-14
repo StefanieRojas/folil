@@ -63,12 +63,18 @@ function tabla() {
                     }
                 },
                 {
-                    data: 'id_calificacion',
+                    data: 'calificacion',
                 },
                     {
                         render: function(data, type, row, meta) {
                             //console.log(row)
                             return createButton(meta.row);
+                        }
+                    },
+                    {
+                        render: function(data, type, row, meta) {
+                            //console.log(row)
+                            return createButton2(meta.row);
                         }
                     },
                 ],
@@ -78,7 +84,11 @@ function tabla() {
 
         function createButton(row) {
 
-            return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-edit"></i></i>  </button>';
+            return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-edit"></i>  </button>';
+        }
+        function createButton2(row) {
+
+            return '<button onclick="modalCalificar(' + row + ')" name="button"> <i class="fas fa-star"></i>  </button>';
         }
     }
 
@@ -93,7 +103,7 @@ function tabla() {
         $("#telefono").val(listaProveedor[row].telefono_prov)
         $("#correo").val(listaProveedor[row].correo_prov)
         $("#estadoProv").val(listaProveedor[row].id_estado_prov)
-        $("#calificacion").val(listaProveedor[row].id_calificacion)
+        $("#calificacion").val(listaProveedor[row].calificacion)
         $('#miModal').modal('show') //muestra el modal
 
     }
@@ -109,7 +119,7 @@ function tabla() {
             "telefono_prov" : $("#telefono").val(),
             "correo_prov" : $("#correo").val(),
             "id_estado_prov" : $("#estadoProv").val(),
-            "id_calificacion" : $("#calificacion").val()
+            "calificacion" : $("#calificacion").val()
 
         }
         
@@ -145,7 +155,7 @@ function tabla() {
     function modalCrear(){
         //.val no funciona en etiquetas de texto (label h1/2/...)
         //.html cambiar valores estaticos como los textos
-        $("#tituloModal").html("Nueva Categoria")
+        $("#tituloModal").html("Nuevo Proveedor")
         localStorage.getItem("idColaborador")
         $("#id").val("-1")
         $("#nombre").val("")
@@ -158,3 +168,51 @@ function tabla() {
         $('#miModal').modal('show')
               
     } 
+
+    function modalCalificar(row){
+        $("#tituloModalCal").html("Calificacion")
+        $("#idprovcali").html(listaProveedor[row].id_prov) //DUDA AQUI
+        $("#nombreCal").html(listaProveedor[row].nombre_prov)
+        $("#apellidoCal").html(listaProveedor[row].apellido_prov)
+        $("#calificacionProv").val("")
+        $('#modalCalificar').modal('show') 
+                
+    }
+
+    function guardarCalificacion(){ 
+        var calificacion = {
+
+            "id_usuario" : localStorage.getItem("idColaborador"), //es para asegurarme que el usuario que se logeo pueda Guardar/Editar esto
+            "id_prov" : $("#id").val(),
+            "calificacion" : $("#calificacionProv").val()
+
+        }
+
+        $.ajax({
+            type: "POST", // la variable type guarda el tipo de la peticion GET,POST,..
+            headers: {
+                't': localStorage.getItem("token")
+            },
+            dataType: "text",
+            url: webService + "/guardarCalificacion", //url guarda la ruta hacia donde se hace la peticion
+            data: calificacion, // data recibe un objeto con la informacion que se enviara al servidor
+            success: function(datos) { //success es una funcion que se utiliza si el servidor retorna informacion
+                
+                data = JSON.parse(datos)
+
+                if(data.respuesta != undefined && data.respuesta == "error"){
+                    toastr["error"](data.descripcion)
+                }
+                else{
+                    obtenerProveedores()
+                    $('#modalCalificar').modal('hide')
+                    toastr["success"](data.descripcion)
+                }    
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown);
+            }
+        })
+
+    }

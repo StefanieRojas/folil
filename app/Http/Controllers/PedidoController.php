@@ -10,6 +10,7 @@ use App\Models\Producto;
 use App\Models\Pedido;
 use App\Models\Abono;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
@@ -73,7 +74,6 @@ class PedidoController extends Controller
         $json["categoria"] = $listaCategoria;
         $json["pedido"] = $pedido;
         $json["proveedores"] = $listaProveedor;
-//$json["productos"] = $listaProducto;
         return response()->json($json);
     }
 
@@ -178,7 +178,7 @@ class PedidoController extends Controller
         $idCategoria = trim($post["id_categoria"]);
         $idUsuario = trim($post["id_usuario"]); //guardando en la variable $id el id_colab que esta en el $post
         $usuario = Colaborador::where('id_colaborador', $idUsuario)->first(); 
-                                     
+
         if(!isset($usuario)){ //isset comprueba si una variable está definida o no en el script de PHP que se está ejecutando
             return response()->json(array("respuesta"=>"error","descripcion"=>"Tu usuario no existe."));
         }
@@ -187,11 +187,14 @@ class PedidoController extends Controller
             return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
         }
 
+        
+
         $sql = 'SELECT DISTINCT p.id_prov, p.nombre_prov 
         FROM proveedor p
         JOIN producto pr
         ON
-        p.id_prov = pr.id_prov';
+        p.id_prov = pr.id_prov
+        WHERE pr.id_categoria = '.$idCategoria;
         $prov = DB::select($sql);
         return $prov;
         

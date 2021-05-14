@@ -40,13 +40,30 @@ function obtenerProvporCategoria(){
             dataType: "text",
             url: webService + "/obtenerProvporCategoria", //url guarda la ruta hacia donde se hace la peticion
             data: {
-                id_colaborador: localStorage.getItem("idColaborador"),
-                id_categoria: localStorage.getItem("idCategoria"),
+                id_usuario: localStorage.getItem("idColaborador"),
+                id_categoria: $("#categoria").val(),
             }, // data recibe un objeto con la informacion que se enviara al servidor
             success: function(datos) { //success es una funcion que se utiliza si el servidor retorna informacion
     
-                listaProveedor = JSON.parse(datos).proveedores //aqui estoy guardando a los proveedores
+                datos = JSON.parse(datos) //aqui estoy guardando a los proveedores
 
+                if(datos.respuesta != undefined && datos.respuesta == "error"){
+                    toastr["error"](datos.descripcion)
+                }
+                else{
+
+                    $("#proveedor").empty();
+                    $("#proveedor").prepend('<option value="" disabled hidden selected>Seleccione...</option>');    
+
+                    for(var contar = 0; contar < datos.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
+                        //length es para saber que tan largo es un array
+                        //concatenar texto con variables ( '" + "' )
+                        var lista = "<option value='" + datos[contar].id_prov + "'>" + datos[contar].nombre_prov + "</option>";
+                        $("#proveedor").append(lista);
+                       // listaProveedor[$contar].nombre_prov//aqui imprimo los nombres de los proveedores que ahi (contar agarra todo lo que tengo dentro y me lo trae)
+                    
+                    }
+                }    
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Status: " + textStatus);
@@ -77,7 +94,7 @@ function tabla() {
                     data: 'categoria'
                 },
                 {
-                    data: 'id_producto'
+                    data: 'nombre_producto'
                 },
                 {
                     data: 'cantidad_producto'
@@ -144,13 +161,13 @@ function tabla() {
             return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-edit"></i></i>  </button>';
         }
 
-        for(var contar = 0; contar < listaProveedor.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
-            //length es para saber que tan largo es un array
-            //concatenar texto con variables ( '" + "' )
-            var lista = "<option value='" + listaProveedor[contar].id_prov + "'>" + listaProveedor[contar].nombre_prov + "</option>";
-            $("#proveedor").append(lista);
-           // listaProveedor[$contar].nombre_prov//aqui imprimo los nombres de los proveedores que ahi (contar agarra todo lo que tengo dentro y me lo trae)
-        }
+        // for(var contar = 0; contar < listaProveedor.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
+        //     //length es para saber que tan largo es un array
+        //     //concatenar texto con variables ( '" + "' )
+        //     var lista = "<option value='" + listaProveedor[contar].id_prov + "'>" + listaProveedor[contar].nombre_prov + "</option>";
+        //     $("#proveedor").append(lista);
+        //    // listaProveedor[$contar].nombre_prov//aqui imprimo los nombres de los proveedores que ahi (contar agarra todo lo que tengo dentro y me lo trae)
+        // }
 
         
         for(var contar = 0; contar < listaCategoria.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
@@ -173,7 +190,6 @@ function tabla() {
         valorSelect =  posicion.options[selectIndex].getAttribute("data-pos") == null?"0":posicion.options[selectIndex].getAttribute("data-pos");
         console.log(valorSelect)
         //Aqui estoy guardando la posicion de mi categoria  
-        
 
         $("#producto").empty();
         $("#producto").prepend('<option value="" disabled hidden selected>Seleccione...</option>');
@@ -221,7 +237,7 @@ function tabla() {
             "nombre_solicitante" : $("#nombre").val(),
             "correo_solicitante" : $("#correo").val(),
             "telefono_solicitante" : $("#telefono").val(),
-            "categoria" : $("#categoria").val(),
+            "id_categoria" : $("#categoria").val(),
             "id_producto" : $("#producto").val(),
             "cantidad_producto" : $("#cantidad").val(),
             "descripcion_prod" : $("#descripcion").val(),
@@ -282,6 +298,7 @@ function tabla() {
         $("#estado").val("")
         $('#miModal').modal('show')
         $("#producto").empty();
-        $("#producto").prepend('<option value="" disabled hidden selected>Seleccione...</option>');
-              
+        $("#producto").prepend('<option value="" disabled hidden selected>Seleccione...</option>');  
+        $("#proveedor").empty();
+        $("#proveedor").prepend('<option value="" disabled hidden selected>Seleccione...</option>');    
     } 

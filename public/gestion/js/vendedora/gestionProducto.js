@@ -54,7 +54,7 @@ function tabla() {
                     data: 'precio_tienda',
                 },
                 {
-                    data: 'id_prov',
+                    data: 'nombre_prov',
                 },
                 {
                     data: 'id_ubicacion',
@@ -71,7 +71,7 @@ function tabla() {
                     }
                 },
                 {
-                    data: 'id_categoria',
+                    data: 'categoria',
                 },
                     {
                         render: function(data, type, row, meta) {
