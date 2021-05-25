@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Estadopedido;
 use App\Models\Colaborador;
 use App\Models\Categoria;
 use App\Models\Proveedor;
 use App\Models\Producto;
 use App\Models\Pedido;
-use App\Models\Abono;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -48,6 +48,7 @@ class PedidoController extends Controller
         $listaProveedor=Proveedor::all();
 
         foreach($pedido as $clave => $valor){
+
             $buscar = Producto::select('id_categoria')->where('id_producto', $pedido[$clave]->id_producto)->first();
             $pedido[$clave]-> id_categoria = $buscar->id_categoria;
 
@@ -71,6 +72,7 @@ class PedidoController extends Controller
             $pedido[$clave]->id_producto = $productoSeleccionado->id_producto;
 
         }
+        $json["colaborador"] = $listaColaborador; //DUDA
         $json["categoria"] = $listaCategoria;
         $json["pedido"] = $pedido;
         $json["proveedores"] = $listaProveedor;
@@ -198,6 +200,52 @@ class PedidoController extends Controller
         $prov = DB::select($sql);
         return $prov;
         
+    }
+
+    public function registroPedido(Request $request)
+    {
+        $post = $request->all(); //agarra todo lo que le estoy enviando del navegador, lo que va en el ajax
+        $validator = Validator::make($post, [ //aqui estoy validando mis datos, en este caso que id es requerido y es tipo numerico
+            'id_colaborador' => 'required|numeric', 
+        ],$messages = [ //los mensajes que me dejara en caso de que no llene los input 
+            'required' => 'El :attribute es requerido.',
+            'numeric' => 'El :attribute debe ser numerico.',
+        ]);
+        if ($validator->fails()) { //aqui si falla me enviara el error
+            return response()->json(array("respuesta"=>"error","descripcion"=>$validator->errors()),422); 
+        }
+        $idColab = trim($post["id_colaborador"]); //guardando en la variable $id el id_colab que esta en el $post
+        $colaborador = Colaborador::where('id_colaborador',$idColab)->first(); //compara ambos y luego me entrega el primero que encuentre con estas cosas
+
+        if(!isset($colaborador)){//un error que aparecera si el usuario no existe dentro de mi tabla
+            return response()->json(array("respuesta"=>"error","descripcion"=>"Tu usuario no existe"));
+        }
+        
+        if($colaborador->id_privilegio != 2){ //error que aparecera si el usuario que ingresa no tiene el permiso para ver/hacer ciertas cosas
+            return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
+        }
+
+        $listaPedido=Pedido::all();
+        $listaProducto=Producto::all();
+        $listaProveedor=Proveedor::all();
+        $listaColaborador=Colaborador::all();
+        $listaEstado=Estadopedido::all();
+
+        foreach($listaPedido as $clave => $valor){
+            $buscarProducto = Producto::select('nombre_producto')->where('id_producto', $listaPedido[$clave]->id_producto)->first();
+            $buscarColaborador = Colaborador::select('nombre_colab')->where('id_colaborador', $listaPedido[$clave]->id_colaborador)->first();
+            $buscarProveedor = Proveedor::select('nombre_prov')->where('id_prov', $listaPedido[$clave]->id_prov)->first();
+            $buscarEstado = EstadoPedido::select('estado')->where('id_estado', $listaPedido[$clave]->id_estado)->first();
+            
+            $listaPedido[$clave]->nombre_producto = $buscarProducto->nombre_producto;
+            $listaPedido[$clave]->nombre_colab = $buscarColaborador->nombre_colab;
+            $listaPedido[$clave]->nombre_prov = $buscarProveedor->nombre_prov;
+            $listaPedido[$clave]->estado = $buscarEstado->estado;
+
+        }
+
+        return response()->json($listaPedido);
+
     }
 
     /**

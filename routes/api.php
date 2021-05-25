@@ -35,5 +35,6 @@ Route::middleware('auth:api')->post('/obtenerProveedores',[ProveedorController::
 Route::middleware('auth:api')->post('/guardarPedido', [PedidoController::class, 'guardarPedido']);
 Route::middleware('auth:api')->post('/obtenerPedidos',[PedidoController::class, 'obtenerPedidos']);
 Route::middleware('auth:api')->post('/obtenerProvporCategoria',[PedidoController::class, 'obtenerProvporCategoria']);
+Route::middleware('auth:api')->post('/registroPedido',[PedidoController::class, 'registroPedido']);
 Route::middleware('auth:api')->post('/guardarProducto', [ProductoController::class, 'guardarProducto']);
 Route::middleware('auth:api')->post('/obtenerProducto',[ProductoController::class, 'obtenerProducto']);
