@@ -3,6 +3,7 @@ $(document).ready(function() {
 });
 
 listaProveedor = null;
+//antes de la funcion de abajo va un checklogin, si me tira true hace todo el resto, sino me tira para el index.
 
 function obtenerProveedores() {
     $.ajax({
@@ -35,6 +36,11 @@ function tabla() {
 
     }
     $('#tablaProveedor').DataTable({
+            "dom": '<lf<t>ip>',
+            "scrollX": true,
+            "columnDefs": [
+                { "orderable": false, "targets": 7 }
+                ],
             data: listaProveedor,
             columns: [{
                     data: 'nombre_prov'
@@ -68,13 +74,7 @@ function tabla() {
                     {
                         render: function(data, type, row, meta) {
                             //console.log(row)
-                            return createButton(meta.row);
-                        }
-                    },
-                    {
-                        render: function(data, type, row, meta) {
-                            //console.log(row)
-                            return createButton2(meta.row);
+                            return createButton(meta.row) +" "+ createButton2(meta.row);
                         }
                     },
                 ],
@@ -84,11 +84,11 @@ function tabla() {
 
         function createButton(row) {
 
-            return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-edit"></i>  </button>';
+            return '<button onclick="modalEditar(' + row + ')" name="button" class="editar"> <i class="fas fa-edit"></i>  </button>';
         }
         function createButton2(row) {
 
-            return '<button onclick="modalCalificar(' + row + ')" name="button"> <i class="fas fa-star"></i>  </button>';
+            return '<button onclick="modalCalificar(' + row + ')" name="button" class="calificar"> <i class="fas fa-star"></i>  </button>';
         }
     }
 

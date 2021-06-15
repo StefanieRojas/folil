@@ -1,3 +1,5 @@
+//ESTE JS ES UNO QUE PUEDEN COMPARTIR MUCHAS VISTAS, POR LO QUE AQUI IRIA TODA COSA QUE SE PUEDA COMPARTIR, POR EJEMPLO EL CERRAR SESION, YA QUE IRIA EN TODAS LAS VISTAS
+
 webService = "http://127.0.0.1:8000/api"
 web = "http://127.0.0.1:8000/gestion/html"
 espanol = {
@@ -20,3 +22,21 @@ espanol = {
         "previous": "Anterior"
     }
 }
+
+function cerrarSesion() { //limpia el localStorage borrando los datos de la sesion y luego te dirije hasta el login.
+
+    localStorage.clear();
+    window.location.href = web+"/index.html"
+    
+}
+
+function checkLogin() {
+     //Despues crear una funcion checklogin que cada vez que entro a una vista sin entrar sesion me redirija al Login diciendo que debo logearme para eso
+    //A lo mejor tirarle un error de los toastr que diga que necesitas ingresar y luego redirija
+
+    //en las vistas traen ajax (en la parte de post o get), antes de llamar estas llamar una funcion CheckLogin
+    //Si el localStorage tiene token que pueda ir a la pagina, sino que vaya al login
+    //aqui debo poner que si esta o no (true o false) entonces en los otros debo preguntar si esta o no con los if
+    localStorage.getItem('token', 'logged-in')
+}
+   

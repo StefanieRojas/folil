@@ -10,42 +10,39 @@
 	<script type="text/javascript" src="../vendor/toastr/toastr.min.js"></script>
 
 	<link href="../vendor/bootstrap4.6.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<link href="../css/style.css" rel="stylesheet">
+	<link href="../css/prueba.css" rel="stylesheet">
 	<link href="../vendor/toastr/toastr.min.css" rel="stylesheet">
 	<link href="../vendor/fontawesome/css/all.css" rel="stylesheet">
 
 </head>
 <!--Coded with love by Mutiullah Samim-->
-<body>
-	<div class="container h-100">
-		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
-				<div class="d-flex justify-content-center">
-					<div class="brand_logo_container">
-						<img src="../imagenes/Folil Logo Original.png" class="brand_logo" alt="Logo">
-					</div>
-				</div>
-				<div class="d-flex justify-content-center form_container">
-					<form>
-						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div>
-							<input id="usuario" type="text" name="" class="form-control input_user" value="" placeholder="usuario">
-						</div>
-						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
-							<input id="pass" type="password" name="" class="form-control input_pass" value="" placeholder="contraseña">
-						</div>
-							<div class="d-flex justify-content-center mt-3 login_container">
-				 	<button onclick="Login()" id="boton1" type="button" name="button" class="btn login_btn">Login</button>
-				   </div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+<body class="mai-splash-screen">
+    <div class="mai-wrapper mai-login">
+      <div class="main-content container">
+        <div class="splash-container row">
+          <div class="col-md-6 user-message"><span class="splash-message text-right">¡Hola!<br> Bienvenido/a al<br> Sistema de Gestion<br>de Administracion <br> e Inventario Folil</span></div>
+          <div class="col-md-6 form-message"><img class="logo-img mb-4" src="../imagenes/dd.png" alt="logo" width="169" height="28"><span class="splash-description text-center mt-5 mb-5">Ingresa a tu cuenta.</span>
+            <form>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><i class="fas fa-user-circle"></i></div>
+                  <input class="form-control" id="usuario" type="text" placeholder="Usuario" autocomplete="off">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend"><i class="fas fa-lock"></i></div>
+                  <input class="form-control" id="pass" type="password" placeholder="Contraseña">
+                </div>
+              </div>
+              <div class="d-flex justify-content-center mt-3 login_container">
+                <button onclick="Login()" id="boton1" type="button" name="button" class="btn login_btn">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  
 </body>
 </html>

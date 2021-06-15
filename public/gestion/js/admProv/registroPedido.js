@@ -3,6 +3,7 @@ $(document).ready(function() {
 });
 
 listaPedido = null;
+posicionPedido = null;
 
 function registroPedido() {
     $.ajax({
@@ -52,7 +53,7 @@ function tabla() {
                 data: 'nombre_prov', 
             },
             {
-                data: 'estado', //estado del pedido que se le designo el trabajo
+                data: 'descripcion', //estado del pedido que se le designo el trabajo
             },
                 {
                     render: function(data, type, row, meta) {
@@ -67,6 +68,46 @@ function tabla() {
 
     function createButton(row) {
 
-        return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-trash-alt"></i> </button>';
+        return '<button onclick="modalBorrar(' + row + ')" name="button"> <i class="fas fa-trash-alt"></i> </button>';
     }
+}
+
+function modalBorrar(row){
+
+    posicionPedido = row;
+    $('#miModal').modal('show')
+
+}
+
+function borrarRegistro() { 
+    $.ajax({
+        type: "POST", // la variable type guarda el tipo de la peticion GET,POST,..
+        headers: {
+            't': localStorage.getItem("token")
+        },
+        dataType: "text",
+        url: webService + "/borrarRegistro", //url guarda la ruta hacia donde se hace la peticion
+        data: {
+            id_usuario: localStorage.getItem("idColaborador"),
+            id_pedido: listaPedido[posicionPedido].id_pedido,
+        }, // data recibe un objeto con la informacion que se enviara al servidor
+        success: function(datos) { //success es una funcion que se utiliza si el servidor retorna informacion
+
+            listaPedido = JSON.parse(datos) 
+
+            if(listaPedido.respuesta != undefined && listaPedido.respuesta == "error"){
+                toastr["error"](listaPedido.descripcion)
+            }
+            else{
+                registroPedido()
+                $('#miModal').modal('hide')
+                toastr["success"](listaPedido.descripcion)
+            }    
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Status: " + textStatus);
+            alert("Error: " + errorThrown);
+        }
+    })
+
 }

@@ -1,9 +1,9 @@
-body,
+body,	
 		html {
 			margin: 0;
 			padding: 0;
 			height: 100%;
-			background: #FFFF !important;
+			background: #ffffff !important;
 		}
 		.user_card {
 			height: 400px;
@@ -71,3 +71,498 @@ body,
 			display: inline-block;
 			margin-bottom: 0.5em;
 		}
+
+		/*Lo de arriba es del Login*/
+
+		table thead tr { /*Esta es la barra de la tabla que lleva color*/
+			height: 60px;
+
+			/*background: #AB3B2F;*/
+
+			background: #fa6163;
+		}
+		.editar{ /*Este es el boton de editar*/
+			position: relative;
+			overflow: hidden;
+			display: inline-block;
+			vertical-align: bottom;
+			font-size: 1.15rem;
+			line-height: 1.5;
+			text-transform: uppercase;
+			border: 0;
+			font-weight: 500;
+			border-radius: 0.3rem;
+			text-align: center;
+			text-decoration: none;
+			background-color: transparent;
+			/*color: red; aqui iria el color que tomaria el boton*/
+		}
+		.calificar{ /*Este es el boton de calificar*/
+			position: relative;
+			overflow: hidden;
+			display: inline-block;
+			vertical-align: bottom;
+			font-size: 1.15rem;
+			line-height: 1.5;
+			text-transform: uppercase;
+			border: 0;
+			font-weight: 500;
+			/*color: red; aqui iria el color que tomaria el boton en caso de que quiera hacerlo*/
+			border-radius: 0.3rem;
+			text-align: center;
+			text-decoration: none;
+			background-color: transparent;
+		}
+		.btn-rojo{ /*Botones rojos*/
+			color: white;
+
+			/*border-color: #AB3B2F;*/
+			/*background-color: #AB3B2F;
+			#D2311F otro color*/
+
+			background-color: #fa6163;
+			border-color: #fa6163;
+			border-radius: .3125rem;
+			padding: .54688rem .875rem;
+			display: inline-block;
+			font-weight: 400;
+			text-align: center;
+			vertical-align: middle;
+			border: .0625rem solid transparent;
+			line-height: 1.6;
+			transition: all .2s ease-in-out;
+		}
+		.btn-blanco{ /*Botones blancos aunque ahora es oscuro*/
+			color: white;
+
+			/*background-color: #3A2A16;*/
+			/*border-color: #3A2A16;*/
+
+			background-color: #363636;
+			border-color: #363636;
+			border-radius: .3125rem;
+			padding: .54688rem .875rem;
+			display: inline-block;
+			font-weight: 400;
+			text-align: center;
+			vertical-align: middle;
+			border: .0625rem solid transparent;
+			line-height: 1.6;
+			transition: all .2s ease-in-out;
+		}
+		.gris{ /*Parece que es todo el fondo gris que tengo*/
+			/*Dudo de esta, porque aun nose bien como hacerlo*/
+			display: flex;
+			overflow-x: hidden;
+			width: 100%;
+			min-height: calc(100vh - 72px);
+			padding-top: 2rem;
+			flex-wrap: wrap;
+
+			/*background-color: #F0EDE0 !important; 
+			#F0ECE0 otro color*/
+
+			background-color: #f4f4f4;
+			box-sizing: border-box;
+			padding-bottom: 2rem;
+		}
+		.contenedor{ /*Esto abarca desde el titulo que dice Tabla, hasta el final del cuadro donde esta la tabla*/
+			padding-right: 3rem !important;
+			padding-left: 3rem !important;
+			width: 100%;
+			margin-right: auto;
+			margin-left: auto;
+			box-sizing: border-box;
+			padding: 25px;
+		}
+		/*.otro{ --Ni idea, pero es de una section--
+			margin-bottom: 3rem !important;
+			box-sizing: border-box;
+		}*/
+		.letra{  /*esto es de la frase que dice Tabla*/
+			margin-left: 2rem;
+			font-size: 0.9rem;
+			font-weight: bold;
+			text-transform: uppercase;
+			letter-spacing: 0.2em;
+			margin-bottom: 3rem !important;
+			margin-top: 0;
+			line-height: 1.2;
+			box-sizing: border-box;
+		}
+		.otromas{ /*El cuadro donde va dentro la tabla*/
+			--bs-gutter-x: 1.5rem;
+			--bs-gutter-y: 0;
+			display: flex;
+			flex-wrap: wrap;
+			margin-top: calc(var(--bs-gutter-y) * -1);
+			margin-right: calc(var(--bs-gutter-x) / -2);
+			margin-left: calc(var(--bs-gutter-x) / -2);
+			box-sizing: border-box;
+		}
+		.uf{ /*Tiene que ver con el cuadro, pero nose que hace xD*/
+			/*Cuando lo borro el cuadro se encoje hacia la izquierda*/
+			margin-bottom: 0 !important;
+			flex: 0 0 auto;
+			width: 100%;
+		}
+		.ayuda{ /*Este le da la sombra y la forma del cuadro que dice Proveedor con el de la tabla*/
+			border: none;
+			box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+			height: 100% !important;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+			word-wrap: break-word;
+			background-color: white;
+			background-clip: border-box;
+			border-radius: 1rem;
+			box-sizing: border-box;
+		}
+		.header{ /*Esta es la parte donde dice Proveedor*/
+			border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
+			position: relative;
+			padding: .7rem .7rem;
+			border-bottom: none;
+			background-color: white;
+			box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+			z-index: 2;
+			margin-bottom: 0;
+			box-sizing: border-box;
+		}
+		/**/
+		.columna {
+			/*padding: 0 30px;*/
+			justify-content: space-between;
+			align-items: center;
+			/*flex-wrap: nowrap !important;*/
+			display: flex !important;
+			width: 100px;
+			/*margin-right: auto;
+			margin-left: auto;
+			flex-basis: 0;
+			flex-grow: 1;
+			max-width: 100%;
+			position: relative;*/
+			width: 100%;
+			padding-right: 15px;
+			padding-left: 15px;
+			box-sizing: border-box;
+		}
+		.extra {
+			margin-right: 5rem !important;
+			align-items: flex-start !important;
+			justify-content: center !important;
+			flex-wrap: wrap !important;
+			flex-direction: column !important;
+			display: flex !important;
+			box-sizing: border-box;
+		}
+		.extra2 {
+			white-space: nowrap !important;
+			padding-top: .25rem !important;
+			padding-bottom: .25rem !important;
+			align-items: center !important;
+			flex-wrap: nowrap !important;
+			display: flex !important;
+			box-sizing: border-box;
+		}
+		/**/
+		.titulo{ /*La frase que dice Proveedor*/
+			margin-bottom: 0;
+			font-size: 1rem;
+			font-weight: 400;
+			text-transform: uppercase;
+			letter-spacing: 0.2em;
+			margin-top: 0;
+			line-height: 1.2;
+			box-sizing: border-box;
+		}
+		.nose{ /*el borde/Espacio entre la tabla y el cuadro en el que esta*/
+			/*Duda con este, porque a lo mejor hago que la tabla sea el ancho
+			completo del todo el cuadro en el qu esta*/
+			flex: 1 1 auto;
+			padding: 2rem 2rem;
+			box-sizing: border-box;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+			word-wrap: break-word;
+			background-color: white;
+			background-clip: border-box;
+			border: 1px solid rgba(0, 0, 0, 0);
+			border-radius: 1rem;
+			--bs-gutter-x: 1.5rem;
+			--bs-gutter-y:0;
+		}
+		/*.tabla{ --nose que cambio hace--
+			width: 100%;
+			box-sizing: border-box;
+		}*/
+		table tr {
+			text-align: center;
+
+			font-weight: 400;
+			line-height: 1.5;
+			
+			
+
+		}
+		table th { /*Aqui van los cambios de la letra de la tabla que van en la parte roja*/
+			color: white;
+			/*font-family: "Open Sans",sans-serif;*/
+			font-size: .9rem;
+			text-transform: uppercase;
+			/*font-weight: 600;*/
+
+			
+			font-weight: 400;
+			line-height: 1.5;
+			letter-spacing: 0.2em;
+			
+			font-weight: normal !important;
+
+		}
+		.table td, .table th { /*La info de la tabla queda mas centrada*/
+			vertical-align: middle;
+		}
+		.table thead th { /*El titulo de la tabla esta mas centrado*/
+			vertical-align: middle;
+			position: unset !important;
+		}
+		/*DUDA CON ESTOS DE ABAJO, A LO MEJOR NO LOS USO*/
+		.foot-bar{
+			border-radius: 0 0 .6875rem .6875rem;
+			display: block;
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+			padding: 1.3125rem 1.3125rem;
+			background-color: white;
+			border-top: .0625rem solid rgba(231, 234, 243, .7);
+			box-sizing: border-box;
+		}
+		.cosastabla
+		{
+			align-items: center !important;
+			justify-content: space-between !important;
+			display: flex;
+			flex-wrap: wrap;
+			margin-right: -15px;
+			margin-left: -15px;
+			box-sizing: border-box;
+		}
+		/**/
+		.mai-top-header {
+			border: 0;
+			margin-bottom: 0;
+
+			/*background-color: #3A2A16;
+			#5E452F otro color
+			*/
+
+			background-color: #363636; 
+			padding: 0;
+		}
+		.navbar-expand {
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			flex-flow: row nowrap;
+			-webkit-box-pack: start;
+			justify-content: flex-start;
+		}
+		.navbar {
+			position: relative;
+			display: flex;
+			-webkit-box-align: center;
+			align-items: center;
+			box-sizing: border-box;
+		}
+		.mai-top-header>.container1 {
+			padding: 0;
+			display: flex;
+			-webkit-box-align: center;
+			align-items: center;
+		}
+		.navbar-expand>.container1, .navbar-expand>.container1-fluid {
+			flex-wrap: nowrap;
+		}
+		.navbar>.container1, .navbar>.container1-fluid {
+			-webkit-box-pack: justify;
+			justify-content: space-between;
+
+		}
+		.container1 {
+			max-width: 1277px;
+			width: 100%;
+			margin-right: auto;
+			margin-left: auto;
+			box-sizing: border-box;
+		}
+		.mai-top-header .navbar-brand {
+			-webkit-box-flex: 0;
+			flex: 0 0 auto;
+			color: white;
+			padding-top: 0; 
+			padding-bottom: 0;
+			font-size: 1.5rem;
+			font-weight: 300;
+			line-height: 68px;
+			height: 68px;
+			width: 117px;
+			background-image: url(../imagenes/dd.png) !important;
+			background-repeat: no-repeat;
+			background-position: 0 center;
+			margin-right: 45px;
+		}
+
+		.navbar-dark .navbar-nav .nav-link {
+			color: white;
+		}
+		.navbar-brand {
+			display: inline-block;
+			white-space: nowrap;
+		}
+		.mai-top-header .mai-top-nav {
+			-webkit-box-flex: 1;
+			flex: 1 1;
+		}
+		.mai-top-header .navbar-nav {
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			flex-direction: row;
+		}
+		.navbar-nav {
+			display: flex;
+			padding-left: 0;
+			margin-bottom: 0;
+			list-style: none;
+			box-sizing: border-box;
+		}
+		.nav {
+			flex-wrap: wrap;
+		}
+		dl, ol, ul {
+			margin-top: 0;
+		}
+		li {
+			display: list-item;
+		}
+		.mai-top-header .navbar-nav>.nav-item>.nav-link {
+			line-height: 62px;
+			padding: 0 18px;
+			outline: 0;
+		}
+		.nav-link {
+			display: block;
+		}
+		.mai-top-header .mai-icons-nav { 
+			margin-right: 10px;
+			-webkit-box-flex: 0;
+			flex: 0 0 auto;
+		}
+		.mai-top-header .navbar-nav {
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			flex-direction: row;
+		}
+		.float-lg-right {
+			float: right !important;
+		}
+		.navbar-nav {
+			display: flex;
+			padding-left: 0;
+			margin-bottom: 0;
+			list-style: none;
+			box-sizing: border-box;
+		}
+		.mai-top-header .mai-icons-nav>.nav-item.button>.nav-link {
+			padding: 0 9px;
+			position: relative;
+		} 
+		.mai-top-header .navbar-nav {
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			flex-direction: row;
+		}
+		.mai-user-nav {
+			-webkit-box-flex: 0;
+			flex: 0 0 auto;
+		}
+		.mai-user-nav>.nav-item.nav-item.dropdown>.nav-link {
+			color: white;
+			padding-right: 0;
+			font-size: 1.1rem;
+			white-space: nowrap;
+		}
+		.mai-user-nav>.nav-item.dropdown>.nav-link .user-name {
+			margin-left: 10px;
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+			color: #fff !important; 
+			border: .0625rem solid transparent !important;
+
+			/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #AB3B2F), color-stop(100%, #9c2c1f));*/
+			/*border-color: #AB3B2F !important;*/
+			/*background-color: #AB3B2F !important; */
+
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fa6163), color-stop(100%, #ca4d50));
+			border-color: #fa6163;
+			background-color: #fa6163;
+			
+			border-radius: .3125rem !important;
+		}
+		.form-row {
+			margin-left: 10px;
+			margin-right: 10px;
+		}
+		div.dataTables_wrapper div.dataTables_length label select {
+			padding: 2px;
+			margin: 0 5px;
+		}
+		input, optgroup, select, textarea {
+			font-size: 1rem;
+			height: 2.2rem;
+			line-height: 1;
+			font-weight: 400;
+			color: #878787;
+			background-color: white;
+			border: 2px solid #ebebeb !important;
+			border-radius: 0;
+		}
+		.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+			color: #757575;
+		}
+		.dataTables_wrapper .dataTables_paginate .paginate_button
+		{
+			padding: .5rem .75rem;
+		}
+		table.dataTable thead th, table.dataTable thead td {
+			border-bottom: none;
+		}
+		table.dataTable thead .sorting {
+			background-image: none;
+		}
+		table.dataTable>thead .sorting:before, table.dataTable>thead .sorting_asc:before, table.dataTable>thead .sorting_desc:before, table.dataTable>thead .sorting_asc_disabled:before, table.dataTable>thead .sorting_desc_disabled:before {
+			right: 0;
+			content: none;
+		}
+		table.dataTable>thead .sorting:after, table.dataTable>thead .sorting_asc:after, table.dataTable>thead .sorting_desc:after, table.dataTable>thead .sorting_asc_disabled:after, table.dataTable>thead .sorting_desc_disabled:after {
+			right: 0;
+			content: none;
+		}
+		table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:not(.sorting_disabled) {
+			padding-right: 18px;
+		}
+		table.dataTable thead .sorting_asc {
+			background-image: url(../imagenes/iconUp1.png) !important;
+		}
+		table.dataTable thead .sorting_desc {
+			background-image: url(../imagenes/iconDown1.png) !important;
+		}
+		/**/
+
+		/*EJEMPLO DE STAR CALIFICACION*/
+
+

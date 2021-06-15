@@ -72,7 +72,7 @@ class PedidoController extends Controller
             $pedido[$clave]->id_producto = $productoSeleccionado->id_producto;
 
         }
-        $json["colaborador"] = $listaColaborador; //DUDA
+
         $json["categoria"] = $listaCategoria;
         $json["pedido"] = $pedido;
         $json["proveedores"] = $listaProveedor;
@@ -132,7 +132,7 @@ class PedidoController extends Controller
             }
 
         }      
-        //
+        //aqui es donde nombro ciertas cosas para luego reemplazarlas o crearlas dependiendo de lo que yo quiera.
         $pedido->nombre_solicitante = trim($post["nombre_solicitante"]);
         $pedido->correo_solicitante = trim($post["correo_solicitante"]);
         $pedido->telefono_solicitante = trim($post["telefono_solicitante"]);
@@ -225,7 +225,8 @@ class PedidoController extends Controller
             return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
         }
 
-        $listaPedido=Pedido::all();
+        // $listaPedido=Pedido::all();
+        $listaPedido=Pedido::where('pedido_borrado', 0)->get();
         $listaProducto=Producto::all();
         $listaProveedor=Proveedor::all();
         $listaColaborador=Colaborador::all();
@@ -235,18 +236,58 @@ class PedidoController extends Controller
             $buscarProducto = Producto::select('nombre_producto')->where('id_producto', $listaPedido[$clave]->id_producto)->first();
             $buscarColaborador = Colaborador::select('nombre_colab')->where('id_colaborador', $listaPedido[$clave]->id_colaborador)->first();
             $buscarProveedor = Proveedor::select('nombre_prov')->where('id_prov', $listaPedido[$clave]->id_prov)->first();
-            $buscarEstado = EstadoPedido::select('estado')->where('id_estado', $listaPedido[$clave]->id_estado)->first();
+            $buscarEstado = EstadoPedido::select('descripcion')->where('id_estado', $listaPedido[$clave]->id_estado)->first();
             
             $listaPedido[$clave]->nombre_producto = $buscarProducto->nombre_producto;
             $listaPedido[$clave]->nombre_colab = $buscarColaborador->nombre_colab;
             $listaPedido[$clave]->nombre_prov = $buscarProveedor->nombre_prov;
-            $listaPedido[$clave]->estado = $buscarEstado->estado;
+            $listaPedido[$clave]->descripcion = $buscarEstado->descripcion;
 
         }
 
         return response()->json($listaPedido);
 
     }
+
+    function borrarRegistro(Request $request)
+    {
+        $post = $request->all(); //agarra todo lo que le estoy enviando del navegador, lo que va en el ajax
+        $validator = Validator::make($post, [
+            "id_usuario" => 'required|numeric',
+            "id_pedido" => 'required|numeric', 
+        ],$messages = [
+            'required' => 'El :attribute es requerido.',
+            'numeric' => 'El :attribute debe ser numerico.',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(array("respuesta"=>"error","descripcion"=>$validator->errors()),422); 
+        }
+        //nose para que es esto :o
+        $idPedido = trim($post["id_pedido"]);
+        $idUsuario = trim($post["id_usuario"]); //guardando en la variable $id el id_colab que esta en el $post
+        $usuario = Colaborador::where('id_colaborador', $idUsuario)->first(); 
+                                     
+        if(!isset($usuario)){ //isset comprueba si una variable está definida o no en el script de PHP que se está ejecutando
+            return response()->json(array("respuesta"=>"error","descripcion"=>"Tu usuario no existe."));
+        }
+
+        if($usuario->id_privilegio != 2){
+            return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
+        }
+
+            $pedido = Pedido::where('id_pedido',$idPedido)->first(); //guarda el pedido que quiero eliminar
+        
+        if(!isset($pedido)){ //isset comprueba si una variable está definida o no en el script de PHP que se está ejecutando
+            return response()->json(array("respuesta"=>"error","descripcion"=>"Tu pedido no existe."));
+        }
+            $pedido->pedido_borrado = 1; //dentro de pedido, en la fila de pedido borrado cambiara a 1
+            $pedido->save();
+            
+            return response()->json(array("respuesta"=>"exitoso","descripcion"=>"El registro del pedido fue creado eliminado exitosamente."));
+
+    }
+
+        
 
     /**
      * Show the form for creating a new resource.

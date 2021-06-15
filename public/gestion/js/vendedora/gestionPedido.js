@@ -160,16 +160,7 @@ function tabla() {
 
             return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-edit"></i></i>  </button>';
         }
-
-        // for(var contar = 0; contar < listaProveedor.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
-        //     //length es para saber que tan largo es un array
-        //     //concatenar texto con variables ( '" + "' )
-        //     var lista = "<option value='" + listaProveedor[contar].id_prov + "'>" + listaProveedor[contar].nombre_prov + "</option>";
-        //     $("#proveedor").append(lista);
-        //    // listaProveedor[$contar].nombre_prov//aqui imprimo los nombres de los proveedores que ahi (contar agarra todo lo que tengo dentro y me lo trae)
-        // }
-
-        
+       
         for(var contar = 0; contar < listaCategoria.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
             //length es para saber que tan largo es un array
             //concatenar texto con variables ( '" + "' )
