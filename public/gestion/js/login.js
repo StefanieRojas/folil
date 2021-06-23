@@ -1,9 +1,14 @@
 $( document ).ready(function() {
+    var verificar = localStorage.getItem('verificar');
+    if(verificar != undefined && verificar == "false") {
+      toastr["error"]("No has iniciado sesion", "Error")
+      localStorage.clear();
+    }
+    
   document.addEventListener("keyup",function(event){
       if(event.code==="Enter"){
           Login();
       }
-
   })  
 
 });

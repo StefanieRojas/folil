@@ -1,6 +1,8 @@
 $(document).ready(function() {
+
+    loginvalid()
     obtenerColaborador() //aqui llama a la funcion obtenerColaborador, asi que apenas cargue la pagina esto sera lo primero que enseñe
-    
+  
 });
 
 listaColab = null;
@@ -36,6 +38,11 @@ function tabla() {
 
     }
     $('#tablaColaboradores').DataTable({
+            "dom": '<lf<t>ip>',
+            "scrollX": true,
+            "columnDefs": [
+                { "orderable": false, "targets": 6 }
+                ],
             data: listaColab,
             columns: [{
                     data: 'nombre_colab'
@@ -87,7 +94,7 @@ function tabla() {
 
         function createButton(row) {
 
-            return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-user-edit"></i>  </button>';
+            return '<button onclick="modalEditar(' + row + ')" name="button" class="editar"> <i class="fas fa-user-edit"></i>  </button>';
         }
     }
 

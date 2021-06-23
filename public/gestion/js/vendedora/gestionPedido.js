@@ -1,10 +1,17 @@
 $(document).ready(function() {
-    obtenerPedidos()    
+    
+    loginvalid()
+    localStorage.setItem('provGuardado', 0)
+    obtenerPedidos() 
+    $('#categoria').on('change',selectProducto); 
+    $('#producto').on('change',selectProveedor); 
+
 });
 
 listaPedidos = null;
 listaProveedor = null;
 listaCategoria = null;
+
 
 function obtenerPedidos() {
     $.ajax({
@@ -18,7 +25,7 @@ function obtenerPedidos() {
             id_colaborador: localStorage.getItem("idColaborador"),
         }, // data recibe un objeto con la informacion que se enviara al servidor
         success: function(datos) { //success es una funcion que se utiliza si el servidor retorna informacion
-
+            
             listaPedidos = JSON.parse(datos).pedido //aqui estoy guardando solo los pedidos
             listaProveedor = JSON.parse(datos).proveedores //aqui estoy guardando a los proveedores
             listaCategoria = JSON.parse(datos).categoria
@@ -58,10 +65,20 @@ function obtenerProvporCategoria(){
                     for(var contar = 0; contar < datos.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
                         //length es para saber que tan largo es un array
                         //concatenar texto con variables ( '" + "' )
-                        var lista = "<option value='" + datos[contar].id_prov + "'>" + datos[contar].nombre_prov + "</option>";
-                        $("#proveedor").append(lista);
+                        console.log(datos[contar].id_estado_prov);
+                        
+                        if(datos[contar].id_estado_prov == "1"){
+                           
+                            var lista = "<option value='" + datos[contar].id_prov + "'>" + datos[contar].nombre_prov + "</option>";
+                            $("#proveedor").append(lista);
+                        }
+                        
                        // listaProveedor[$contar].nombre_prov//aqui imprimo los nombres de los proveedores que ahi (contar agarra todo lo que tengo dentro y me lo trae)
                     
+                    }
+                    if(localStorage.getItem('provGuardado') != 0) {
+                        //seleccione el select con el id que guarde
+                        $("#proveedor").val(localStorage.getItem('provGuardado'));
                     }
                 }    
             },
@@ -73,13 +90,17 @@ function obtenerProvporCategoria(){
     }
 
 function tabla() {
-    console.log(listaPedidos);
     if($.fn.DataTable.isDataTable("#tablaPedidos")){
 
         $("#tablaPedidos").DataTable().destroy();
 
     }
     $('#tablaPedidos').DataTable({
+            "dom": '<lf<t>ip>',
+            "scrollX": true,
+            "columnDefs": [
+                { "orderable": false, "targets": 12 }
+                ],
             data: listaPedidos,
             columns: [{
                     data: 'nombre_solicitante'
@@ -106,7 +127,12 @@ function tabla() {
                     data: 'tipo_solicitud'
                 },
                 {
-                    data: 'precio_pedido'
+                    data: null,
+                    render: function(row) {
+                        row.cantidad_producto * row.precio_tienda;
+                        return row.cantidad_producto * row.precio_tienda;
+                    }
+
                 },
                 {
                     data: 'nombre_prov'
@@ -148,7 +174,7 @@ function tabla() {
                     {
                         render: function(data, type, row, meta) {
                             //console.log(row)
-                            return createButton(meta.row);
+                            return createButton(meta.row); 
                         }
                     },
                 ],
@@ -158,14 +184,17 @@ function tabla() {
 
         function createButton(row) {
 
-            return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-edit"></i></i>  </button>';
+            return '<button onclick="modalEditar(' + row + ')" name="button" class="editar"> <i class="fas fa-edit"></i></i>  </button>';
         }
        
         for(var contar = 0; contar < listaCategoria.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
             //length es para saber que tan largo es un array
             //concatenar texto con variables ( '" + "' )
-            var lista = "<option value='" + listaCategoria[contar].id_categoria + "' data-pos= '" + contar +"'>" + listaCategoria[contar].categoria + "</option>";
-            $("#categoria").append(lista);
+            if(listaCategoria[contar].id_estado == "1"){
+                var lista = "<option value='" + listaCategoria[contar].id_categoria + "' data-pos= '" + contar +"'>" + listaCategoria[contar].categoria + "</option>";
+                $("#categoria").append(lista);
+            }
+            
            // este option me trae el valor del array (0 hasta donde dure)  mas el nombre de mi categoria
         }
 
@@ -209,14 +238,18 @@ function tabla() {
         $("#categoria").val(listaPedidos[row].id_categoria) 
         $('#categoria').change();
         $("#producto").val(listaPedidos[row].id_producto)
+        $('#producto').change();
         $("#cantidad").val(listaPedidos[row].cantidad_producto)
         $("#descripcion").val(listaPedidos[row].descripcion_prod)
         $("#tipoSolicitud").val(listaPedidos[row].tipo_solicitud)
         $("#precio").val(listaPedidos[row].precio_pedido)
         $("#proveedor").val(listaPedidos[row].id_prov)
+        console.log(listaPedidos[row].id_prov)
         $("#confirmacion").val(listaPedidos[row].id_confirmacion)
         $("#estado").val(listaPedidos[row].id_estado)
         $('#miModal').modal('show') //muestra el modal
+
+        localStorage.setItem('provGuardado', listaPedidos[row].id_prov)
 
     }
 
@@ -256,9 +289,11 @@ function tabla() {
                     toastr["error"](data.descripcion)
                 }
                 else{
+                    
                     obtenerPedidos()
                     $('#miModal').modal('hide')
                     toastr["success"](data.descripcion)
+                    
                 }    
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -272,7 +307,9 @@ function tabla() {
     function modalCrear(){
         //.val no funciona en etiquetas de texto (label h1/2/...)
         //.html cambiar valores estaticos como los textos
-        $("#tituloModal").html("Nueva Categoria")
+        localStorage.setItem('provGuardado', 0)
+
+        $("#tituloModal").html("Nuevo Pedido")
         localStorage.getItem("idColaborador")
         $("#id").val("-1")
         $("#nombre").val("")
@@ -291,5 +328,32 @@ function tabla() {
         $("#producto").empty();
         $("#producto").prepend('<option value="" disabled hidden selected>Seleccione...</option>');  
         $("#proveedor").empty();
-        $("#proveedor").prepend('<option value="" disabled hidden selected>Seleccione...</option>');    
+        $("#proveedor").prepend('<option value="" disabled hidden selected>Seleccione...</option>');  
+
+        $('#producto').attr('disabled',true)
+        $('#proveedor').attr('disabled',true)
+        
     } 
+
+    function selectProducto(){
+        console.log(this.value)
+        if(this.value != "" ){     
+            $('#producto').attr('disabled',false)
+            $('#producto').val('');  
+        }else{
+          $('#producto').attr('disabled',true)
+          $('#producto').val('') 
+        }
+        
+      }
+
+      function selectProveedor(){
+        if(this.value != "" ){     
+            $('#proveedor').attr('disabled',false)
+            $('#proveedor').val('');  
+        }else{
+          $('#proveedor').attr('disabled',true)
+          $('#proveedor').val('') 
+        }
+        
+      }

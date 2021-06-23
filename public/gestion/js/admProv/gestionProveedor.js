@@ -1,5 +1,9 @@
 $(document).ready(function() {
+
+    loginvalid()
     obtenerProveedores()    
+    
+    
 });
 
 listaProveedor = null;
@@ -171,7 +175,7 @@ function tabla() {
 
     function modalCalificar(row){
         $("#tituloModalCal").html("Calificacion")
-        $("#idprovcali").html(listaProveedor[row].id_prov) //DUDA AQUI
+        $("#id").val(listaProveedor[row].id_prov) //DUDA AQUI
         $("#nombreCal").html(listaProveedor[row].nombre_prov)
         $("#apellidoCal").html(listaProveedor[row].apellido_prov)
         $("#calificacionProv").val("")
@@ -180,11 +184,20 @@ function tabla() {
     }
 
     function guardarCalificacion(){ 
+        var memo=document.getElementsByName('rating');
+	    for(i=0; i<memo.length; i++){
+	        if(memo[i].checked){
+	         //var memory=memo[i].checked;
+		        var memory=memo[i].value;
+		        console.log(memory)
+	        }
+        }
+        
         var calificacion = {
 
             "id_usuario" : localStorage.getItem("idColaborador"), //es para asegurarme que el usuario que se logeo pueda Guardar/Editar esto
             "id_prov" : $("#id").val(),
-            "calificacion" : $("#calificacionProv").val()
+            "calificacion" : memory
 
         }
 
@@ -216,3 +229,4 @@ function tabla() {
         })
 
     }
+

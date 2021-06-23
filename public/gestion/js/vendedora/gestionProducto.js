@@ -1,5 +1,8 @@
 $(document).ready(function() {
-    obtenerProducto()    
+
+    loginvalid()
+    obtenerProducto()   
+     
 });
 
 listaCategoria = null;
@@ -40,6 +43,11 @@ function tabla() {
 
     }
     $('#tablaProducto').DataTable({
+            "dom": '<lf<t>ip>',
+            "scrollX": true,
+            "columnDefs": [
+                { "orderable": false, "targets": 7 }
+                ],
             data: listaProducto,
             columns: [{
                     data: 'nombre_producto'
@@ -86,13 +94,15 @@ function tabla() {
 
         function createButton(row) {
 
-            return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-edit"></i></i>  </button>';
+            return '<button onclick="modalEditar(' + row + ')" name="button" class="editar"> <i class="fas fa-edit"></i></i>  </button>';
         }
         for(var contar = 0; contar < listaProveedor.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
             //length es para saber que tan largo es un array
             //concatenar texto con variables ( '" + "' )
+            if(listaProveedor[contar].id_estado_prov == "1"){
             var lista = "<option value='" + listaProveedor[contar].id_prov + "'>" + listaProveedor[contar].nombre_prov + "</option>";
             $("#proveedor").append(lista);
+            }
            // listaProveedor[$contar].nombre_prov//aqui imprimo los nombres de los proveedores que ahi (contar agarra todo lo que tengo dentro y me lo trae)
         }
 
@@ -100,8 +110,10 @@ function tabla() {
         for(var contar = 0; contar < listaCategoria.length; contar++){ //Crea un bucle primero es para decir donde parto (0), la variable que sea menor a mi arreglo y por ultimo el numero que como quiero que mi variable suba o aumente su valor
             //length es para saber que tan largo es un array
             //concatenar texto con variables ( '" + "' )
+            if(listaCategoria[contar].id_estado == "1"){
             var lista = "<option value='" + listaCategoria[contar].id_categoria + "' data-pos= '" + contar +"'>" + listaCategoria[contar].categoria + "</option>";
             $("#categoria").append(lista);
+            }
            // este option me trae el valor del array (0 hasta donde dure)  mas el nombre de mi categoria
         }
 
@@ -111,7 +123,7 @@ function tabla() {
         //.val() cuando el parentesis viene vacio obtiene info, cuando viene lleno asigna valor.
         console.log(row) 
         $("#tituloModal").html("Editar Producto")
-        $("#idprod").val(listaProducto[row].id_producto)
+        $("#id").val(listaProducto[row].id_producto)
         $("#producto").val(listaProducto[row].nombre_producto)
         $("#stock").val(listaProducto[row].stock)
         $("#precioProducto").val(listaProducto[row].precio_producto)
@@ -127,7 +139,7 @@ function tabla() {
         var producto = {
 
             "id_usuario" : localStorage.getItem("idColaborador"), //es para asegurarme que el usuario que se logeo pueda Guardar/Editar esto
-            "id_producto" : $("#idprod").val(),
+            "id_producto" : $("#id").val(),
             "nombre_producto" : $("#producto").val(),
             "stock" : $("#stock").val(),
             "precio_producto" : $("#precioProducto").val(),
@@ -172,7 +184,7 @@ function tabla() {
         //.html cambiar valores estaticos como los textos
         $("#tituloModal").html("Nuevo Producto")
         localStorage.getItem("idColaborador")
-        $("#idprod").val("-1")
+        $("#id").val("-1")
         $("#producto").val("")
         $("#stock").val("")
         $("#precioProducto").val("")

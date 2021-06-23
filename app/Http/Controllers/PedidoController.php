@@ -44,7 +44,7 @@ class PedidoController extends Controller
 
         $listaCategoria=Categoria::all();
         $listaProducto=Producto::all();
-        $pedido=Pedido::all();
+        $pedido=Pedido::where('pedido_borrado', 0)->get();
         $listaProveedor=Proveedor::all();
 
         foreach($pedido as $clave => $valor){
@@ -69,6 +69,7 @@ class PedidoController extends Controller
             $pedido[$clave]->id_categoria = $categoriaSeleccionada->id_categoria;
             $productoSeleccionado = $listaProducto->where('id_producto', $pedido[$clave]->id_producto)->first();
             $pedido[$clave]->nombre_producto = $productoSeleccionado->nombre_producto;
+            $pedido[$clave]->precio_tienda = $productoSeleccionado->precio_tienda;
             $pedido[$clave]->id_producto = $productoSeleccionado->id_producto;
 
         }
@@ -89,7 +90,6 @@ class PedidoController extends Controller
             "correo_solicitante" => 'required|string',
             "telefono_solicitante" => 'required|numeric',
             "tipo_solicitud" => 'required|string',
-            "precio_pedido" => 'required|numeric',
             "id_prov" => 'required|numeric',
             "id_confirmacion" => 'required|numeric',
             "id_estado" => 'required|numeric',
@@ -138,12 +138,16 @@ class PedidoController extends Controller
         $pedido->telefono_solicitante = trim($post["telefono_solicitante"]);
         $pedido->descripcion_prod = trim($post["descripcion_prod"]);
         $pedido->tipo_solicitud = trim($post["tipo_solicitud"]);
-        $pedido->precio_pedido = trim($post["precio_pedido"]);
         $pedido->id_prov = trim($post["id_prov"]);
         $pedido->id_confirmacion = trim($post["id_confirmacion"]);
         $pedido->id_estado = trim($post["id_estado"]);
         $pedido->id_producto = trim($post["id_producto"]);
-        $pedido->cantidad_producto = trim($post["cantidad_producto"]);        
+        $pedido->cantidad_producto = trim($post["cantidad_producto"]);  
+
+        $pedido->id_colaborador = trim($post["id_usuario"]);
+        $guardarPrecio = Producto::select("precio_tienda")->where('id_producto', $pedido->id_producto)->first();
+        $pedido->precio_pedido = $guardarPrecio["precio_tienda"] * $pedido->cantidad_producto;
+        
         try {
             $pedido->save(); //aqui guarda la informacion que ingrese en el modal
             
@@ -189,9 +193,7 @@ class PedidoController extends Controller
             return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
         }
 
-        
-
-        $sql = 'SELECT DISTINCT p.id_prov, p.nombre_prov 
+        $sql = 'SELECT DISTINCT p.id_prov, p.nombre_prov, p.id_estado_prov 
         FROM proveedor p
         JOIN producto pr
         ON
@@ -225,7 +227,6 @@ class PedidoController extends Controller
             return response()->json(array("respuesta"=>"error","descripcion"=>"No tienes permiso"));
         }
 
-        // $listaPedido=Pedido::all();
         $listaPedido=Pedido::where('pedido_borrado', 0)->get();
         $listaProducto=Producto::all();
         $listaProveedor=Proveedor::all();
@@ -237,9 +238,10 @@ class PedidoController extends Controller
             $buscarColaborador = Colaborador::select('nombre_colab')->where('id_colaborador', $listaPedido[$clave]->id_colaborador)->first();
             $buscarProveedor = Proveedor::select('nombre_prov')->where('id_prov', $listaPedido[$clave]->id_prov)->first();
             $buscarEstado = EstadoPedido::select('descripcion')->where('id_estado', $listaPedido[$clave]->id_estado)->first();
-            
+ 
             $listaPedido[$clave]->nombre_producto = $buscarProducto->nombre_producto;
-            $listaPedido[$clave]->nombre_colab = $buscarColaborador->nombre_colab;
+           
+            $listaPedido[$clave]->nombre_colab = $buscarColaborador == null ? "": $buscarColaborador->nombre_colab;
             $listaPedido[$clave]->nombre_prov = $buscarProveedor->nombre_prov;
             $listaPedido[$clave]->descripcion = $buscarEstado->descripcion;
 
@@ -283,7 +285,7 @@ class PedidoController extends Controller
             $pedido->pedido_borrado = 1; //dentro de pedido, en la fila de pedido borrado cambiara a 1
             $pedido->save();
             
-            return response()->json(array("respuesta"=>"exitoso","descripcion"=>"El registro del pedido fue creado eliminado exitosamente."));
+            return response()->json(array("respuesta"=>"exitoso","descripcion"=>"El registro del pedido fue eliminado exitosamente."));
 
     }
 

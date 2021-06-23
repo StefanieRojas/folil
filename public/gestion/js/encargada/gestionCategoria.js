@@ -1,5 +1,8 @@
 $(document).ready(function() {
+
+    loginvalid()
     obtenerCategoria()    
+    
 });
 
 listaCategoria = null;
@@ -35,6 +38,11 @@ function tabla() {
 
     }
     $('#tablaCategoria').DataTable({
+            "dom": '<lf<t>ip>',
+            "scrollX": true,
+            "columnDefs": [
+                { "orderable": false, "targets": 2 }
+                ],
             data: listaCategoria,
             columns: [{
                     data: 'categoria'
@@ -63,7 +71,7 @@ function tabla() {
 
         function createButton(row) {
 
-            return '<button onclick="modalEditar(' + row + ')" name="button"> <i class="fas fa-edit"></i></i>  </button>';
+            return '<button onclick="modalEditar(' + row + ')" name="button" class="editar"> <i class="fas fa-edit"></i></i>  </button>';
         }
     }
 

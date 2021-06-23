@@ -1,252 +1,191 @@
 <!doctype html>
 <html>
-<head>
-  <title>Vista Administradora</title> 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  <script type="text/javascript" src="../../vendor/jQuery.js"></script>
-  <script type="text/javascript" src="../../vendor/utils.js"></script>
-  <script type="text/javascript" src="../../vendor/Popper/popper.min.js"></script> 
-  <script type="text/javascript" src="../../vendor/bootstrap4.6.0/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../../js/admProv/gestionProveedor.js"></script>
-  <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/dataTables.buttons.min.js"></script>
-  <script type="text/javascript" src="../../vendor/fontawesome/js/fontawesome.min.js"></script>
-  <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/dataTables.select.min.js"></script>
-  <script type="text/javascript" src="../../vendor/fontawesome/js/solid.min.js"></script>
-  <script type="text/javascript" src="../../vendor/toastr/toastr.min.js"></script>
-
-  <link href="../../vendor/DataTables/DataTables-1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="../../vendor/bootstrap4.6.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../../vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
-  <link href="../../vendor/DataTables/css/editor.dataTables.min.css" rel="stylesheet">
-  <link href="../../vendor/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href="../../vendor/DataTables/css/editor.bootstrap4.min.css" rel="stylesheet">
-  <link href="../../vendor/DataTables/DataTables-1.10.24/css/buttons.bootstrap4.min.css" rel="stylesheet">
-  <link href="../../vendor/DataTables/DataTables-1.10.24/css/select.boostrap4.min.css" rel="stylesheet">
-  <link href="../../vendor/fontawesome/css/solid.min.css" rel="stylesheet">
-  <link href="../../vendor/toastr/toastr.min.css" rel="stylesheet">
-  <link href="../../css/style.css" rel="stylesheet">
-  
-</head>
-<body>
-  <nav class="navbar navbar-expand navbar-dark mai-top-header">
-    <div class="container1"><a class="navbar-brand" href="../menu.html"></a>
-      <ul class="nav navbar-nav mai-top-nav">
-        <li class="nav-item"> <a class="nav-link" href="gestionProveedor.html">Gestion Proveedor</a></li>
-        <li class="nav-item"><a class="nav-link" href="registroPedidos.html">Registro Pedidos</a></li>
-      </ul>
-      <ul class="navbar-nav float-lg-right mai-icons-nav">
-        <li class="nav-item mai-settings">
-          <a class="nav-link button-toggle" onclick="cerrarSesion()" href="#" aria-hidden="true" role="button"><span class="icon fas fa-power-off"></span></a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav float-lg-right mai-user-nav">
-        <li class="dropdown nav-item">
-          <a class="nav-link" aria-expanded="false"><span class="user-name">Violeta Parra</span></a>
-        </li>
-      </ul>
-    </div>
-  </nav>
- <div class="gris">
-   <div class="contenedor">
-      <section class="otro">
-        
-        <div class="otromas">
-          <div class="uf">
-            <div class="ayuda">
-              <div class="header">
-
-                <!--PRUEBAAA-->
-                <div class="columna">
-                  <div class=" extra">
-                    <h4 class="titulo">Proveedor</h4> <!--Esto no se debe borrar porque es algo que me sirve-->
+   <head>
+      <title>Vista Administradora</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <script type="text/javascript" src="../../vendor/jQuery.js"></script>
+      <script type="text/javascript" src="../../vendor/utils.js"></script>
+      <script type="text/javascript" src="../../vendor/Popper/popper.min.js"></script> 
+      <script type="text/javascript" src="../../vendor/bootstrap4.6.0/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="../../js/admProv/gestionProveedor.js"></script>
+      <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/jquery.dataTables.min.js"></script>
+      <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/dataTables.buttons.min.js"></script>
+      <script type="text/javascript" src="../../vendor/fontawesome/js/fontawesome.min.js"></script>
+      <script type="text/javascript" src="../../vendor/DataTables/DataTables-1.10.24/js/dataTables.select.min.js"></script>
+      <script type="text/javascript" src="../../vendor/fontawesome/js/solid.min.js"></script>
+      <script type="text/javascript" src="../../vendor/toastr/toastr.min.js"></script>
+      <link href="../../vendor/DataTables/DataTables-1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
+      <link href="../../vendor/bootstrap4.6.0/css/bootstrap.min.css" rel="stylesheet">
+      <link href="../../vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+      <link href="../../vendor/DataTables/css/editor.dataTables.min.css" rel="stylesheet">
+      <link href="../../vendor/DataTables/DataTables-1.10.24/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+      <link href="../../vendor/DataTables/css/editor.bootstrap4.min.css" rel="stylesheet">
+      <link href="../../vendor/DataTables/DataTables-1.10.24/css/buttons.bootstrap4.min.css" rel="stylesheet">
+      <link href="../../vendor/DataTables/DataTables-1.10.24/css/select.boostrap4.min.css" rel="stylesheet">
+      <link href="../../vendor/fontawesome/css/solid.min.css" rel="stylesheet">
+      <link href="../../vendor/toastr/toastr.min.css" rel="stylesheet">
+      <link href="../../css/style.css" rel="stylesheet">
+   </head>
+   <body>
+      <nav class="navbar navbar-expand navbar-dark mai-top-header">
+         <div class="container1">
+            <a class="navbar-brand"></a>
+            <ul class="nav navbar-nav mai-top-nav">
+               <li class="nav-item"> <a class="nav-link" href="gestionProveedor.html">Gestion Proveedor</a></li>
+               <li class="nav-item"><a class="nav-link" href="registroPedidos.html">Registro Pedidos</a></li>
+            </ul>
+            <ul class="navbar-nav float-lg-right mai-icons-nav">
+               <li class="nav-item mai-settings">
+                  <a class="nav-link button-toggle" onclick="cerrarSesion()" href="#" aria-hidden="true" role="button"><span class="icon fas fa-power-off"></span></a>
+               </li>
+            </ul>
+            <ul class="nav navbar-nav float-lg-right mai-user-nav">
+               <li class="dropdown nav-item">
+                  <a class="nav-link" aria-expanded="false"><span class="user-name" id="userName"></span></a>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div class="gris">
+         <div class="contenedor">
+            <section class="otro">
+               <div class="otromas">
+                  <div class="uf">
+                     <div class="ayuda">
+                        <div class="header">
+                           <!--PRUEBAAA-->
+                           <div class="columna">
+                              <div class=" extra">
+                                 <h4 class="titulo">Proveedores</h4>
+                                 <!--Esto no se debe borrar porque es algo que me sirve-->
+                              </div>
+                              <div class="extra2">
+                                 <button onclick="modalCrear()" type="button" class="btn btn-rojo btn-default" data-toggle="modal" >Crear</button>
+                              </div>
+                           </div>
+                           <!--PRUEBAAA-->
+                        </div>
+                        <div class="nose">
+                           <div class="tabla">
+                              <table id="tablaProveedor" class="table table-hover" style="width: 100%;">
+                                 <thead>
+                                    <tr>
+                                       <th scope="col">Nombre</th>
+                                       <th scope="col">Apellido</th>
+                                       <th scope="col">Direccion</th>
+                                       <th scope="col">Telefono</th>
+                                       <th scope="col">Correo</th>
+                                       <th scope="col">Estado</th>
+                                       <th scope="col">Calificacion</th>
+                                       <th scope="col">Acciones</th>
+                                    </tr>
+                                 </thead>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-                  <div class="extra2">
-                    <button onclick="modalCrear()" type="button" class="btn btn-rojo btn-default" data-toggle="modal" >Crear</button>
+               </div>
+            </section>
+         </div>
+      </div>
+      <div class="modal fade" id="miModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="tituloModal"></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="form-row">
+                     <div class="modal-body col-md-6">
+                        <label for="nombre">Nombre:</label>
+                        <input type="nombre" class="form-control" id="nombre" name="nombre" placeholder="Nombre" oninput="this.value=Text(this.value)">
+                     </div>
+                     <div class="modal-body col-md-6">
+                        <label for="apellido">Apellido:</label>
+                        <input type="apellido" class="form-control" id="apellido" name="apellido" placeholder="Apellido" oninput="this.value=Text(this.value)">
+                     </div>
                   </div>
-                </div>
-                <!--PRUEBAAA-->
-                
-              </div>
-              <div class="nose">
-                <div class="tabla">
-                  <table id="tablaProveedor" class="table table-hover" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Direccion</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Calificacion</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                  </table>
-                </div>
-              </div>
+                  <div class="form-row">
+                     <div class="modal-body col-md-6">
+                        <label for="direccion">Direccion:</label>  
+                        <input type="direccion" class="form-control" id="direccion" name="direccion" placeholder="Direccion" oninput="this.value=NumText(this.value)">
+                     </div>
+                     <div class="modal-body col-md-6">
+                        <label for="telefono">Telefono:</label>  
+                        <input type="telefono" class="form-control" id="telefono" name="telefono" placeholder="Telefono" oninput="this.value=numeroTelefono(this.value)">
+                     </div>
+                  </div>
+                  <div class="form-row">
+                     <div class="modal-body col-md-6">
+                        <label for="correo">Correo:</label>  
+                        <input type="correo" class="form-control" id="correo" name="correo" placeholder="Correo" onkeyup="ValidateEmail(this);">
+                     </div>
+                     <div class="modal-body col-md-6">
+                        <label for="estadoColaborador">Estado:</label>
+                        <select class="form-control" id="estadoProv">
+                           <option value="" disabled hidden selected>Seleccione...</option>
+                           <option value="1"> Activo </option>
+                           <option value="2"> Inactivo </option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="modal-body"> 
+                     <input id="id" name="idcol" type="hidden">
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button onclick="guardarProveedor()" type="submit" class="btn btn-rojo btn-default">Guardar</button>
+                  <button type="button" class="btn btn-blanco btn-default" data-dismiss="modal">Cerrar</button>
+               </div>
             </div>
-          </div>
-        </div>
-      </section>
-   </div>
- </div> 
-    
-     <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered " role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="tituloModal"></h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-            <div class="form-row">
-              <div class="modal-body col-md-6">
-                <label for="nombre">Nombre:</label>
-                <input type="nombre" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
-              </div>
-              
-              <div class="modal-body col-md-6">
-                <label for="apellido">Apellido:</label>
-                <input type="apellido" class="form-control" id="apellido" name="apellido" placeholder="Apellido">
-              </div>
-            </div>
-              
-            <div class="form-row">
-              <div class="modal-body col-md-12">
-                <label for="telefono">Direccion:</label>  
-                <input type="direccion" class="form-control" id="direccion" name="direccion" placeholder="Direccion">
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="modal-body col-md-6">
-                <label for="telefono">Telefono:</label>  
-                <input type="telefono" class="form-control" id="telefono" name="telefono" placeholder="Telefono">
-              </div>
-
-              <div class="modal-body col-md-6">
-                <label for="correo">Correo:</label>  
-                <input type="correo" class="form-control" id="correo" name="correo" placeholder="Correo">
-              </div>
-            </div>
-              
-            <div class="form-row">
-              <div class="modal-body col-md-6">
-                <label for="estadoColaborador">Estado:</label>
-                <select class="form-control" id="estadoProv">
-                  <option value="" disabled hidden selected>Seleccione...</option>
-                  <option value="1"> Activo </option>
-                  <option value="2"> Inactivo </option>
-                </select>
-              </div>
-
-              <div class="modal-body col-md-6">
-                <label for="calificacion">Calificacion:</label>  
-                <input type="calificacion" class="form-control" id="calificacion" name="calificacion" placeholder="Calificacion">
-              </div>
-            </div>
-
-              <div class="modal-body"> 
-                <input id="id" name="idcol" type="hidden">
-              </div>
-
-              <div class="modal-footer">
-                <button onclick="guardarProveedor()" type="submit" class="btn btn-rojo btn-default">Guardar</button>
-                <button type="button" class="btn btn-blanco btn-default" data-dismiss="modal">Cerrar</button>
-              </div>      
-            </div>
-          </div>
-        </div>
+         </div>
       </div>
-    </div>
-
-    <div class="modal fade" id="modalCalificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title" id="tituloModalCal"></h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button> 
-          </div>
-
-            <div class="form-row">
-              <div class="modal-body col-md-6">
-                <label for="nombre">Nombre:</label>
-                <label for="nombre" id="nombreCal" name="nombreProvCal"></label> 
-              </div>
-
-              <div class="modal-body col-md-6">
-                <label for="apellido">Apellido:</label>
-                <label for="apellido" id="apellidoCal" name="apellidoProvCal"></label> 
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="modal-body col-md-12 star-rating star-7"> <!--EJEMPLOO BORRAR LO QUE DIGA STAR-->
-                <label for="calificacion">Calificacion:</label>  
-                <input type="radio" id="cal1" name="calificar" value="1">
-                <label for="cal1">1</label>
-                <input type="radio" id="cal2" name="calificar" value="2">
-                <label for="cal2">2</label>
-                <input type="radio" id="cal3" name="calificar" value="3">
-                <label for="cal3">3</label>
-                <input type="radio" id="cal4" name="calificar" value="4">
-                <label for="cal4">4</label>
-                <input type="radio" id="cal5" name="calificar" value="5">
-                <label for="cal5">5</label>
-                <input type="radio" id="cal6" name="calificar" value="6">
-                <label for="cal6">6</label>
-                <input type="radio" id="cal7" name="calificar" value="7">
-                <label for="cal7">7</label>
-              </div>
-            </div>    
-            <!--
-              <div class="modal-body">
-                <label for="nombre">Nombre:</label>
-                <label for="nombre" id="nombreCal" name="nombreProvCal"></label> 
-              </div>
-              
-              <div class="modal-body">
-                <label for="apellido">Apellido:</label>
-                <label for="apellido" id="apellidoCal" name="apellidoProvCal"></label> 
-              </div>
-            -->
-
-            <!--
-              <div class="modal-body">
-                <label for="calificacion">Calificacion:</label>  
-                <input type="radio" id="cal1" name="gender" value="1">
-                <label for="cal1">1</label>
-                <input type="radio" id="cal2" name="gender" value="2">
-                <label for="cal2">2</label>
-                <input type="radio" id="cal3" name="gender" value="3">
-                <label for="cal3">3</label>
-                <input type="radio" id="cal4" name="gender" value="4">
-                <label for="cal4">4</label>
-                <input type="radio" id="cal5" name="gender" value="5">
-                <label for="cal5">5</label>
-                <input type="radio" id="cal6" name="gender" value="6">
-                <label for="cal6">6</label>
-                <input type="radio" id="cal7" name="gender" value="7">
-                <label for="cal7">7</label>
-              </div>
-            -->
-
-              <div class="modal-body"> 
-                <input id="idprovcali" name="idcal" type="hidden">
-              </div>
-
-              <div class="modal-footer">
-                <button onclick="modalCalificar()" type="submit" class="btn btn-rojo btn-default">Guardar</button>
-                <button type="button" class="btn btn-blanco btn-default" data-dismiss="modal">Cerrar</button>
-              </div>
+      <div class="modal fade" id="modalCalificar" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+         <h4 class="modal-title" id="tituloModal"></h4>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
       </div>
-</body>
+      <div class="modal-body">
+         <div class="form-row">
+            <div class="modal-body col-md-6">
+               <label for="nombre">Nombre:</label>
+               <label for="nombre" id="nombreCal" name="nombreProvCal"></label> 
+            </div>
+            <div class="modal-body col-md-6">
+               <label for="apellido">Apellido:</label>
+               <label for="apellido" id="apellidoCal" name="apellidoProvCal"></label> 
+            </div>
+         </div>
+         <div class="form-row">
+            <div class="modal-body col-md-12 ">
+               <!--EJEMPLOO BORRAR LO QUE DIGA STAR-->
+               <label for="calificacion">Calificacion:</label>
+               <div class="star-rating star-5">
+                  <input type="radio" name="rating" value="1"><i></i>
+                  <input type="radio" name="rating" value="2"><i></i>
+                  <input type="radio" name="rating" value="3"><i></i>
+                  <input type="radio" name="rating" value="4"><i></i>
+                  <input type="radio" name="rating" value="5"><i></i>
+               </div>
+             
+            </div>
+         </div>
+         <div class="modal-body"> 
+            <input id="id" name="idcol" type="hidden">
+         </div>
+         <div class="modal-footer">
+            <button onclick="guardarCalificacion()" type="submit" class="btn btn-rojo btn-default">Guardar</button>
+            <button type="button" class="btn btn-blanco btn-default" data-dismiss="modal">Cerrar</button>
+         </div>
+      </div>
+   </body>
 </html>

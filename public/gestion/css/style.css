@@ -5,81 +5,12 @@ body,
 			height: 100%;
 			background: #ffffff !important;
 		}
-		.user_card {
-			height: 400px;
-			width: 350px;
-			margin-top: auto;
-			margin-bottom: auto;
-			background: #F2EADD;
-			position: relative;
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
-			padding: 10px;
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			border-radius: 5px;
-
-		}
-		.brand_logo_container {
-			position: absolute;
-			height: 170px;
-			width: 170px;
-			top: -75px;
-			border-radius: 50%;
-			background: #c0392b;
-			padding: 10px;
-			text-align: center;
-		}
-		.brand_logo {
-			height: 150px;
-			width: 150px;
-			border-radius: 50%;
-			border: 2px solid white;
-		}
-		.form_container {
-			margin-top: 100px;
-		}
-		.login_btn {
-			width: 100%;
-			background: #c0392b !important;
-			color: white !important;
-		}
-		.login_btn:focus {
-			box-shadow: none !important;
-			outline: 0px !important;
-		}
-		.login_container {
-			padding: 0 2rem;
-		}
-		.input-group-text {
-			background: #c0392b !important;
-			color: white !important;
-			border: 0 !important;
-			border-radius: 0.25rem 0 0 0.25rem !important;
-		}
-		.input_user,
-		.input_pass:focus {
-			box-shadow: none !important;
-			outline: 0px !important;
-		}
-		.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-			background-color: #c0392b !important;
-		}       
-		a.editor-create {
-			display: inline-block;
-			margin-bottom: 0.5em;
-		}
-
-		/*Lo de arriba es del Login*/
-
 		table thead tr { /*Esta es la barra de la tabla que lleva color*/
 			height: 60px;
 
-			/*background: #AB3B2F;*/
+			background: #AB3B2F;
 
-			background: #fa6163;
+			/* background: #fa6163; */
 		}
 		.editar{ /*Este es el boton de editar*/
 			position: relative;
@@ -113,15 +44,31 @@ body,
 			text-decoration: none;
 			background-color: transparent;
 		}
+		.borrar{ /*Este es el boton de calificar*/
+			position: relative;
+			overflow: hidden;
+			display: inline-block;
+			vertical-align: bottom;
+			font-size: 1.15rem;
+			line-height: 1.5;
+			text-transform: uppercase;
+			border: 0;
+			font-weight: 500;
+			/*color: red; aqui iria el color que tomaria el boton en caso de que quiera hacerlo*/
+			border-radius: 0.3rem;
+			text-align: center;
+			text-decoration: none;
+			background-color: transparent;
+		}
 		.btn-rojo{ /*Botones rojos*/
 			color: white;
 
-			/*border-color: #AB3B2F;*/
-			/*background-color: #AB3B2F;
-			#D2311F otro color*/
+			border-color: #AB3B2F;
+			background-color: #AB3B2F;
+			/*#D2311F otro color*/
 
-			background-color: #fa6163;
-			border-color: #fa6163;
+			/* background-color: #fa6163;
+			border-color: #fa6163; */
 			border-radius: .3125rem;
 			padding: .54688rem .875rem;
 			display: inline-block;
@@ -135,11 +82,11 @@ body,
 		.btn-blanco{ /*Botones blancos aunque ahora es oscuro*/
 			color: white;
 
-			/*background-color: #3A2A16;*/
-			/*border-color: #3A2A16;*/
+			background-color: #3A2A16;
+			border-color: #3A2A16;
 
-			background-color: #363636;
-			border-color: #363636;
+			/* background-color: #363636;
+			border-color: #363636; */
 			border-radius: .3125rem;
 			padding: .54688rem .875rem;
 			display: inline-block;
@@ -159,10 +106,10 @@ body,
 			padding-top: 2rem;
 			flex-wrap: wrap;
 
-			/*background-color: #F0EDE0 !important; 
-			#F0ECE0 otro color*/
+			background-color: #F0EDE0 !important; 
+			/*#F0ECE0 otro color*/
 
-			background-color: #f4f4f4;
+			/* background-color: #f4f4f4; */
 			box-sizing: border-box;
 			padding-bottom: 2rem;
 		}
@@ -224,6 +171,17 @@ body,
 			border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
 			position: relative;
 			padding: .7rem .7rem;
+			border-bottom: none;
+			background-color: white;
+			box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
+			z-index: 2;
+			margin-bottom: 0;
+			box-sizing: border-box;
+		}
+		.header1{ /*Esta es la parte donde dice Proveedor*/
+			border-radius: calc(1rem - 1px) calc(1rem - 1px) 0 0;
+			position: relative;
+			padding: 1.75rem .7rem;
 			border-bottom: none;
 			background-color: white;
 			box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
@@ -358,11 +316,11 @@ body,
 			border: 0;
 			margin-bottom: 0;
 
-			/*background-color: #3A2A16;
-			#5E452F otro color
+			background-color: #3A2A16;
+			/*#5E452F otro color
 			*/
 
-			background-color: #363636; 
+			/* background-color: #363636;  */
 			padding: 0;
 		}
 		.navbar-expand {
@@ -503,13 +461,13 @@ body,
 			color: #fff !important; 
 			border: .0625rem solid transparent !important;
 
-			/*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #AB3B2F), color-stop(100%, #9c2c1f));*/
-			/*border-color: #AB3B2F !important;*/
-			/*background-color: #AB3B2F !important; */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #AB3B2F), color-stop(100%, #9c2c1f));
+			border-color: #AB3B2F !important;
+			background-color: #AB3B2F !important;
 
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fa6163), color-stop(100%, #ca4d50));
+			/* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fa6163), color-stop(100%, #ca4d50));
 			border-color: #fa6163;
-			background-color: #fa6163;
+			background-color: #fa6163; */
 			
 			border-radius: .3125rem !important;
 		}
@@ -530,6 +488,11 @@ body,
 			background-color: white;
 			border: 2px solid #ebebeb !important;
 			border-radius: 0;
+		}
+		textarea {
+			width: 45rem;
+			height: 80px;
+			border-radius: .25rem;
 		}
 		.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
 			color: #757575;
@@ -564,5 +527,70 @@ body,
 		/**/
 
 		/*EJEMPLO DE STAR CALIFICACION*/
-
-
+		.star-rating {
+			font-size: 0;
+			white-space: nowrap;
+			display: inline-block;
+			/* width: 250px; remove this */
+			height: 50px;
+			overflow: hidden;
+			position: relative;
+			background: url(../imagenes/stargris.png);
+			background-size: contain;
+		  }
+		  .star-rating i {
+			opacity: 0;
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100%;
+			/* width: 20%; remove this */
+			z-index: 1;
+			background: url(../imagenes/star.png);
+			background-size: contain;
+		  }
+		  .star-rating input {
+			-moz-appearance: none;
+			-webkit-appearance: none;
+			opacity: 0;
+			display: inline-block;
+			/* width: 20%; remove this */
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			z-index: 2;
+			position: relative;
+		  }
+		  .star-rating input:hover + i,
+		  .star-rating input:checked + i {
+			opacity: 1;
+		  }
+		  .star-rating i ~ i {
+			width: 40%;
+		  }
+		  .star-rating i ~ i ~ i {
+			width: 60%;
+		  }
+		  .star-rating i ~ i ~ i ~ i {
+			width: 80%;
+		  }
+		  .star-rating i ~ i ~ i ~ i ~ i {
+			width: 100%;
+		  }
+		  ::after,
+		  ::before {
+			height: 100%;
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			text-align: center;
+			vertical-align: middle;
+		  }
+		  
+		  .star-rating.star-5 {width: 260px;}
+		  .star-rating.star-5 input,
+		  .star-rating.star-5 i {width: 20%;}
+		  .star-rating.star-5 i ~ i {width: 40%;}
+		  .star-rating.star-5 i ~ i ~ i {width: 60%;}
+		  .star-rating.star-5 i ~ i ~ i ~ i {width: 80%;}
+		  .star-rating.star-5 i ~ i ~ i ~ i ~i {width: 100%;}

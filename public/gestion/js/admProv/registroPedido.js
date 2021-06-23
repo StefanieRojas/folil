@@ -1,5 +1,8 @@
 $(document).ready(function() {
-    registroPedido()    
+
+    loginvalid()  
+    registroPedido()
+      
 });
 
 listaPedido = null;
@@ -36,6 +39,11 @@ function tabla() {
 
     }
     $('#tablaRegistroPedidos').DataTable({
+            "dom": '<lf<t>ip>',
+            "scrollX": true,
+            "columnDefs": [
+                { "orderable": false, "targets": 6 }
+                ],
         data: listaPedido,
         columns: [{
                 data: 'nombre_producto' 
@@ -68,7 +76,7 @@ function tabla() {
 
     function createButton(row) {
 
-        return '<button onclick="modalBorrar(' + row + ')" name="button"> <i class="fas fa-trash-alt"></i> </button>';
+        return '<button onclick="modalBorrar(' + row + ')" name="button" class="borrar"> <i class="fas fa-trash-alt"></i> </button>';
     }
 }
 
