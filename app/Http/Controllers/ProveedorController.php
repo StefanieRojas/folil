@@ -161,7 +161,7 @@ class ProveedorController extends Controller
             $proveedor->save(); //aqui guarda la informacion que ingrese en el modal
             
              //el programa entiende que termine de editar un proveedor y me enviara el mensaje de que edite exitosamente
-                return response()->json(array("respuesta"=>"exitoso","descripcion"=>"La calificacion fue editada exitosamente."));
+                return response()->json(array("respuesta"=>"exitoso","descripcion"=>"Proveedor calificado exitosamente."));
             
 
         } 

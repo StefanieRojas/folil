@@ -297,8 +297,30 @@ function tabla() {
                 }    
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Status: " + textStatus);
-                alert("Error: " + errorThrown);
+                // alert("Status: " + textStatus);
+                // alert("Error: " + errorThrown);
+                
+                console.log(XMLHttpRequest.responseText);
+    
+                fallo=JSON.parse(XMLHttpRequest.responseText)
+    
+                
+    
+                mensaje="Los campos son requeridos. <br>";
+    
+                  Object.keys(fallo.descripcion).forEach(function(key, keyIndex) {
+                    
+                    string = fallo.descripcion[key][0];
+    
+                    function capitalizarPrimeraLetra(str) {
+                      return str.charAt(0).toUpperCase() + str.slice(1);
+                    }
+                    
+                    string = capitalizarPrimeraLetra(string);
+    
+                  mensaje += string + "<br>";
+                  });
+                  toastr["error"](mensaje, "Error en el servidor.")
             }
         })
 

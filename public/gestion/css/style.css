@@ -378,6 +378,10 @@ body,
 		.navbar-dark .navbar-nav .nav-link {
 			color: white;
 		}
+		.navbar-dark .navbar-nav .nav-link1 {
+			color: white;
+			text-decoration: none;
+		}
 		.navbar-brand {
 			display: inline-block;
 			white-space: nowrap;
@@ -415,6 +419,14 @@ body,
 		.nav-link {
 			display: block;
 		}
+		.mai-top-header .navbar-nav>.nav-item>.nav-link1 {
+			line-height: 62px;
+			padding: 0 18px;
+			outline: 0;
+		}
+		.nav-link1 {
+			display: block;
+		}
 		.mai-top-header .mai-icons-nav { 
 			margin-right: 10px;
 			-webkit-box-flex: 0;
@@ -439,6 +451,10 @@ body,
 			padding: 0 9px;
 			position: relative;
 		} 
+		.mai-top-header .mai-icons-nav>.nav-item.button>.nav-link1 {
+			padding: 0 9px;
+			position: relative;
+		} 
 		.mai-top-header .navbar-nav {
 			-webkit-box-orient: horizontal;
 			-webkit-box-direction: normal;
@@ -454,7 +470,16 @@ body,
 			font-size: 1.1rem;
 			white-space: nowrap;
 		}
+		.mai-user-nav>.nav-item.nav-item.dropdown>.nav-link1 {
+			color: white;
+			padding-right: 0;
+			font-size: 1.1rem;
+			white-space: nowrap;
+		}
 		.mai-user-nav>.nav-item.dropdown>.nav-link .user-name {
+			margin-left: 10px;
+		}
+		.mai-user-nav>.nav-item.dropdown>.nav-link1 .user-name {
 			margin-left: 10px;
 		}
 		.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
@@ -594,3 +619,7 @@ body,
 		  .star-rating.star-5 i ~ i ~ i {width: 60%;}
 		  .star-rating.star-5 i ~ i ~ i ~ i {width: 80%;}
 		  .star-rating.star-5 i ~ i ~ i ~ i ~i {width: 100%;}
+
+		  .nav-link:active {
+			  background-color: #AB3B2F !important;
+		  }

@@ -210,26 +210,3 @@ function disabled(){
     $('#btnGuardar').remove();
 }
 
-//Esto revisa que no haya dejado algun espacio sin llenar
-// function validar(){
-
-// 	$('#'+tipo+'Modal').find('input').each(function(){ 
-	        
-// 		if(!(this.id).includes('Encargado') && !(this.id).includes('inputCelularAlumno') && !(this.id).includes('inputWhatsappAlumno') && !(this.id).includes('inputDiscapacidadAlumno') 
-// 			&& !(this.id).includes('inputApellidoMaterno') && !(this.id).includes('inputMailSecundarioAlumno') ){
-
-// 		    if (this.disabled == false && (this.value == "" || this.value == undefined)) {
-// 		        $(this).addClass('is-invalid')
-// 		        valida = false;
-// 		    }else{
-// 		        $(this).removeClass('is-invalid')
-// 		    }
-
-// 		    if(this.disabled == false && (this.id).includes('Mail')){
-// 		        if(ValidateEmail(this) == undefined || ValidateEmail(this) == false){
-// 		          valida = false;
-// 		        } 
-// 		    }
-// 		}
-// 	});	
-// }
